@@ -4,9 +4,6 @@
     box-sizing: content-box;
     color: white;
     /* font-family: 'Roboto', sans-serif; */
-    /* background-image: linear-gradient(toright, #0f0c29, #302b63, #24243e); */
-
-
 }
 
 html, body{
@@ -41,6 +38,8 @@ ul li a{
   color: white;
   text-decoration: none;
   transition: .6s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 .menu li a:hover{
@@ -261,7 +260,7 @@ ul li a{
   font-family:  'Roboto', sans-serif;
   transition: .6s ease-in-out;
   cursor: pointer;
-  border-color: orange;
+  border-color: #fff;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 15px;
@@ -269,7 +268,7 @@ ul li a{
 
 #button:hover{
   background: white;
-  color: black;
+  color: #000000;
   transition: .6s ease-in-out;
 }
 
@@ -336,6 +335,9 @@ ul li a{
   margin-top : -2.5rem;
   margin-left: 4rem;
   font-size: 18px;
+}
+#icons2{
+  font-size: 25px;
 }
 
 .footer{
