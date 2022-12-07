@@ -7,7 +7,7 @@
 }
 
 html, body{
-  background-image: linear-gradient(to right, #121212, #0f0c29, #24243e);
+  background-image: linear-gradient(to right, #121212, #0f0c29, #121220);
 }
 
 
@@ -20,6 +20,7 @@ html, body{
   align-items: center;
   justify-content: space-between;
   background: inherit;
+  opacity: 80%;
   color: #FFF;
   height: 80px;
   padding: 1rem;
@@ -300,6 +301,10 @@ ul li a{
   
 }
 
+#about{
+  background-image: url('img/galax.jpg');
+}
+
 .img2{
   float: left;
   margin-left: 10rem;
@@ -354,18 +359,13 @@ ul li a{
 
 
 @media only screen and (max-width: 768px){
-    /* For Desktop */
+    /* For Mobile  */
       .navbar-nav{
         margin-left: 5rem;
-        border: 1px solid white;
+       
      }
-      .nav-link{
-        border: 1px solid white;
-      }
       #icons{
-        border: 1px solid white;
         position: absolute;
         right: 5rem;
-        top
       }
 } 
