@@ -38,7 +38,7 @@ $mail = new PHPMailer(true);
     $mail->isHTML(true); //Set email format to HTML
     $mail->Subject = $subject; 
     $mail->Body = $message;
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->AltBody = $message;
 
     if ($mail->send()) {
         echo "success";
