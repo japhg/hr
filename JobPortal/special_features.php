@@ -57,7 +57,7 @@
             <thead>
                 <tr>
                     <th>
-                        <input type="checkbox" id="mcheck"> Check All
+                        <!-- <input type="checkbox" id="mcheck"> Check All </input> -->
                     </th>
                     <th>Username</th>
                     <th>Email</th>
