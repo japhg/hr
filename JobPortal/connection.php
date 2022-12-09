@@ -12,6 +12,4 @@
     echo "Failed to Connect to database";
     die();
   }
-  else{
-    echo "Successfully connected to database!";
-  }
+  

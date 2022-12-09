@@ -47,7 +47,8 @@ function multi_email() {
             if (data == "success") {
                 $('#multi-responce').html("Successfully sent");
 
-            } else {
+            } 
+            else {
                 $('#multi-responce').html(data);
             }
         }
