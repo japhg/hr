@@ -10,7 +10,6 @@ html, body{
   background-image: linear-gradient(to right, #121212, #0f0c29, #121220);
 }
 
-
 .top-nav {
   display: flex;
   position: fixed;
@@ -20,9 +19,9 @@ html, body{
   align-items: center;
   justify-content: space-between;
   background: inherit;
-  opacity: 80%;
+  opacity: 50%;
   color: #FFF;
-  height: 80px;
+  height: 100px;
   padding: 1rem;
 }
 
@@ -43,7 +42,7 @@ ul li a{
   font-weight: 300;
 }
 
-.menu li a:hover{
+.active, .menu li a:hover{
   color: #6559ca;
 }
 
@@ -102,7 +101,6 @@ ul li a{
   transform: rotate(-405deg);
 }
 
-
 @media (max-width: 700px) {
   .menu-button-container {
     display: flex;
@@ -145,10 +143,13 @@ ul li a{
   #icons{
     display: none;
   }
+  #logo{
+    width: 20%;
+  }
 }
 
 .menu::before {
-    content: '';
+    content: ' ';
     position: absolute;
     width: 100%;
     height: 1px;
@@ -302,7 +303,7 @@ ul li a{
 }
 
 #about{
-  background-image: url('img/galax.jpg');
+  background-image: url('../img/galax.jpg');
 }
 
 .img2{

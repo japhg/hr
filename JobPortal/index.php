@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/noo.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="img/hrlogo.png" type="image/x-icon">
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,14 +16,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Inter:wght@300;400;600;800&family=Poppins&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    
     <link rel="stylesheet" href="css/style/style.css">
+    <link rel="stylesheet" href="css/style/loader.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <title>Job Portal</title>
 </head>
 <body id="home">
+  <?php include 'loader.php';?>
       <header class="top-nav">
         <div>
-        <img src="img/logo.png" alt="BORA Logo" class="img-responsive" id="logo">
+        <img src="img/hrlogo.png" alt="HR Logo" class="img-responsive" width="45%" id="logo" style="margin-top: 2rem;">
         </div>
         <input id="menu-toggle" type="checkbox" />
         <label class='menu-button-container' for="menu-toggle">
@@ -51,10 +58,10 @@
         <h1>Creatives for  <br> Revolutionary Arts <br> and Branding</h1>
         <p>Wield the Web with the Right Digital Marketing Strategy</p>
         <br><br>
-        <button type="button" id="button">Find Jobs Now</button>
+        <button type="button" id="button" onclick="parent.location='special_features.php'">Find Jobs Now</button>
       </div>
       <br><br><br><br><br><br><br><br><br><br><br>
-      <div class="about" id="about"><br><br><br><br><br><br><br><br><br><br><br>
+      <div class="about" id="about" style="background-image: url('img/galax.jpg');"><br><br><br><br><br><br><br><br><br><br><br>
         <div class="img2">
           <img src="img/Man with laptop.gif" alt="Man with Laptop" >
         </div>
@@ -94,7 +101,8 @@
           <img src="img/logo.png" alt="BORA Logo" class="img-responsive" id="logo">
       </div>
 
-
+   
       <script src="js/bootstrap.js"></script>
 </body>
+
 </html>
