@@ -240,7 +240,7 @@ ul li a{
 
 .img{
   float: right;
-  margin-top: -19.5rem;
+  margin-top: -25rem;
 }
 
 #logo-title{
@@ -264,9 +264,34 @@ ul li a{
 .text p{
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   color: darkgray;
   width: 25rem;
+}
+
+#search{
+  width: 30rem;
+  background: inherit;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  padding: .8rem 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+#search:focus{
+  outline: none;
+  text-transform: uppercase;
+}
+
+::placeholder{
+  text-transform: none;
+}
+
+.fa-magnifying-glass{
+  position: absolute;
+  margin: 1.2rem 1rem;
 }
 
 #button{
@@ -276,7 +301,6 @@ ul li a{
   border-radius: 30px;
   padding: .8rem;
   width: 10rem;
-  font-family:  'Roboto', sans-serif;
   transition: .6s ease-in-out;
   cursor: pointer;
   border-color: #fff;
