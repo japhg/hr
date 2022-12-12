@@ -8,6 +8,7 @@
 
 html, body{
   background-image: linear-gradient(to right, #121212, #0f0c29, #121220);
+  height: 100vh;
 }
 
 .top-nav {
@@ -19,9 +20,9 @@ html, body{
   align-items: center;
   justify-content: space-between;
   background: inherit;
-  opacity: 50%;
+  opacity: 80%;
   color: #FFF;
-  height: 100px;
+  height: 120px;
   padding: 1rem;
 }
 
@@ -108,7 +109,7 @@ ul li a{
   .menu {
     position: absolute;
     top: 0;
-    margin-top: 50px;
+    margin-top: 100px;
     left: 0;
     flex-direction: column;
     width: 100%;
@@ -145,6 +146,16 @@ ul li a{
   }
   #logo{
     width: 20%;
+    margin-top: -1rem;
+  }
+  #logo-title{
+    display: none;
+  }
+  img{
+    display: none;
+  }
+  .text h1, p{
+    display: none;
   }
 }
 
@@ -229,8 +240,14 @@ ul li a{
 
 .img{
   float: right;
-  margin-top: 5rem;
-  margin-right: 5rem;
+  margin-top: -19.5rem;
+}
+
+#logo-title{
+  font-family: 'Poiret One', cursive;
+  position: absolute;
+  top: 2rem;
+  left: 8rem;
 }
 
 .text{
@@ -302,9 +319,6 @@ ul li a{
   
 }
 
-#about{
-  background-image: url('../img/galax.jpg');
-}
 
 .img2{
   float: left;
@@ -347,11 +361,18 @@ ul li a{
 }
 
 .footer{
-  border-top: 1px solid dimgray;
   background: #121212;
-  height: 10rem;
-  margin-top: 50rem;
+  /* height: 10rem;
+  margin-top: 50rem; */
 }
+
+#logo-title_footer{
+  position: relative;
+  top: -6rem;
+  left: 9rem;
+  font-family: 'Poiret One', cursive;
+}
+
  .img3{
   float: right;
   margin-top: -35rem;
@@ -360,13 +381,20 @@ ul li a{
 
 
 @media only screen and (max-width: 768px){
-    /* For Mobile  */
+ 
       .navbar-nav{
         margin-left: 5rem;
        
      }
       #icons{
         position: absolute;
-        right: 5rem;
+        right: 2rem;
+        font-size: 14px;
+      }
+      #logo-title{
+        display: none;
+      }
+      ul li a{
+        font-size: 12px;
       }
 } 
