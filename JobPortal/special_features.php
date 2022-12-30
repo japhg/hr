@@ -76,7 +76,6 @@
     <body>
         <?php
         include 'connection.php';
-        include 'loader.php';
         include 'special_features/vendor/autoload.php';
         // Get count of data set first
         $sql = "SELECT * FROM `email_tbl`";

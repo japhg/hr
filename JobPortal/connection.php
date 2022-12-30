@@ -12,4 +12,8 @@
     echo "Failed to Connect to database";
     die();
   }
+
+
+?>
+
   

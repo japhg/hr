@@ -1,20 +1,23 @@
+@font-face {
+  font-family: 'Cera-Light';
+  src: url(../fonts/CeraRoundProDEMO-Light.otf);
+}
+
 *{
-    padding: 0;
-    margin: 0;
-    box-sizing: content-box;
-    color: white;
-    /* font-family: 'Roboto', sans-serif; */
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+  color: white;
 }
 
 html, body{
-  background-image: linear-gradient(to right, #121212, #0f0c29, #121220);
+  background-image: linear-gradient(to right, #191726, #151324, #2d2d52);
   height: 100vh;
 }
 
 .top-nav {
   display: flex;
   position: fixed;
-  margin-top: -10rem;
   width: 100%;
   flex-direction: row;
   align-items: center;
@@ -24,6 +27,7 @@ html, body{
   color: #FFF;
   height: 120px;
   padding: 1rem;
+  z-index: 1;
 }
 
 .menu {
@@ -39,7 +43,7 @@ ul li a{
   color: white;
   text-decoration: none;
   transition: .6s ease-in-out;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Cera-Light', sans-serif;
   font-weight: 300;
 }
 
@@ -102,7 +106,301 @@ ul li a{
   transform: rotate(-405deg);
 }
 
-@media (max-width: 700px) {
+.menu::before {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  border-radius: 4px;
+  background-color: #ffff;
+  bottom: 0;
+  left: 0;
+  transform-origin: center;
+  transform: scaleX(0);
+  transition: transform .6s ease-in-out;
+}
+
+.menu:hover::before {
+  transform-origin: center;
+  transform: scaleX(1);
+}
+
+#icons{
+  position: absolute;
+  right: 4rem;
+  font-size: 1.5rem;
+}
+
+.fa {
+  padding: 18px;
+  text-align: right;
+  text-decoration: none;
+}
+
+.fa-facebook-square{
+  color: white;
+  transition: .6s ease-in-out;
+}
+
+.fa-facebook-square:hover{
+  color:#4267B2;
+  transition: .6s ease-in-out;
+}
+
+.fa-instagram {
+  color: white;
+  transition: .6s ease-in-out;
+}
+
+.fa-instagram:hover{
+   background:  #eccc68;
+   background:  radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  transition: .6s ease-in-out;
+}
+
+.fa-twitter {
+  color: white;  
+  transition: .6s ease-in-out;
+}
+
+.fa-twitter:hover{
+  color: #55ACEE;
+  transition: .6s ease-in-out;
+}
+
+.fa-google{
+  color: white;
+  transition: .6s ease-in-out;
+}
+
+.fa-google:hover{
+  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: .6s ease-in-out;
+}
+
+.img{
+  position: absolute;
+  top: 0; 
+  right: 0;
+}
+
+#logo-title{
+  font-family: 'Poiret One', cursive;
+  position: absolute;
+  top: 2rem;
+  left: 8rem;
+}
+
+.text{
+  position: relative;
+  top: 15rem;
+  left: 0rem;
+  text-align: justify;
+
+} 
+
+.text h1{
+  font-size: 5rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+}
+
+.text h6{
+  font-size: 19px;
+  font-family: "Poppins",Sans-serif;
+  font-weight: 300;
+  color: #BABABA;
+}
+
+#button{
+  background: none;
+  color: white;
+  border: 1px solid white;
+  border-radius: 30px;
+  padding: .8rem;
+  width: 10rem;
+  transition: .6s ease-in-out;
+  cursor: pointer;
+  border-color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+#button a{
+  text-decoration: none; 
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 300; 
+  font-size: 15px; 
+  color: #fff;
+}
+
+#button:hover{
+  background: white;
+  color: #000000;
+  transition: .6s ease-in-out;
+}
+
+#button a:hover{
+  background: white;
+  color: #000000;
+  transition: .6s ease-in-out;
+}
+
+.description{
+  position: absolute;
+  left: 60rem;
+  top: 75rem;
+}
+
+.description h3{
+  font-family: 'Cera-Light', sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+  color: darkgray;
+}
+
+.description h1{
+  font-family: 'Cera-Light', sans-serif;
+  font-size: 58px;
+  font-weight: 300;
+}
+
+.description h5{
+  color: #FFF;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.description p{
+  color: #BCBCBC;
+  font-family: "Poppins",Sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6em;
+  letter-spacing: .4px;
+  text-align: justify;
+}
+
+.img2{
+  position: absolute;
+  top: 78rem;
+  left: 5rem;
+}
+
+.contact_info{
+  position: absolute;
+  top: 150rem;
+  left: 10rem;
+}
+
+.contact_info h1{
+  color: #FFF;
+  font-family: "cera-light",Sans-serif;
+  font-size: 58px;
+  font-weight: 200;
+  line-height: 1em;
+}
+
+.contact_info h3{
+  color: #FFF;
+  font-family: "cera-light",Sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+}
+
+.elementor-icon-list-items{
+  align-content: center;
+  align-items: center;
+}
+
+.elementor-icon-list-item{
+  margin: 0;
+  padding: 0;
+  position: relative;
+  list-style: none;
+}
+
+.elementor-icon-list-text{
+  font-family: 'Roboto', sans-serif;
+  color: #FFF;
+  line-height: 1.6em;
+  letter-spacing: .7px;
+  font-size: 17px;
+  margin-left: 6rem;
+}
+
+.elementor-icon-list-items .elementor-icon-list-item .elementor-icon-list-text {
+  display: inline-block;
+}
+
+.icons{
+  font-family: 'Roboto', sans-serif;
+}
+
+.icons i{
+  font-size: 40px;
+}
+
+#icons2{
+  font-size: 25px;
+}
+
+/* Footer */
+.footer{ 
+  position: relative;
+  background: #000000;
+}
+
+#logo-title_footer{
+  position: relative;
+  top: -6rem;
+  left: 8rem;
+  font-family: 'Poiret One', cursive;
+}
+
+.img3{
+  position: absolute;
+  top: 150rem;
+  right: 20rem;
+}
+
+#footer_links{
+  margin-top: 2rem;
+}
+
+#footer_links ul{
+  text-align: center;
+}
+
+#footer_links ul li{
+  list-style: none;
+  text-align: center;
+  color: #FFFFFF61;
+}
+
+#footer_links ul span{
+  font-size: 22px;
+}
+
+#footer_links ul li a{
+  color: #FFFFFF61;
+}
+
+
+/* FOR MOBILE PHONE */
+@media screen and (max-width: 768px) {
+  /* .top-nav{
+    margin-top: -210px;
+  } */
   .menu-button-container {
     display: flex;
   }
@@ -146,279 +444,90 @@ ul li a{
   }
   #logo{
     width: 20%;
-    margin-top: -1rem;
   }
   #logo-title{
-    display: none;
+    display: none; 
   }
   img{
     display: none;
   }
-  .text h1, p{
+  #button{
+    width: 7rem;
+    font-size: 11px;
+  }
+  #button a{
+    font-size: 11px;
+  }
+  .text{
+    text-align: center;
+    top: 13rem;
+    left: 0;
+  }
+  .text h1{
+    font-size: 4rem;
+    top: 0;
+    left: 0;
+  }
+  .text h6{
+    margin: 0 1rem 0 1rem;
+  }
+  .description{
+    text-align: center;
+    margin: 1rem;
+
+    left: 0;
+    right: 0;
+  }
+  .description h3{
+    font-size: 20px;
+  }
+  .description h1{
+    font-size: 38px;
+  }
+  .description h5{
+    font-size: 15px;
+  }
+  .description p{
+    font-size: 12px;
+    text-align: justify;
+  }
+  .contact_info{
+    top: 140rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  .contact_info h1{
+    font-size: 38px;
+  }
+  .contact_info h3{
+    font-size: 18px;
+  }
+  .contact_info p{
+    left: -1rem;
+    right: 0;
+  }
+  .elementor-icon-list-item{
+    left: 0;
+  }
+  .elementor-icon-list-items{
+    left: 0;
+  }
+  .elementor-icon-list-text{
+    font-size: 14px;
+  }
+  .elementor-icon-list-items .elementor-icon-list-item .elementor-icon-list-text {
+    display: block;
+    text-align: center;
+  }
+  .row{
+    text-align: center;
+  }
+  #footer_links ul li{
+    text-align: center;
+  }
+  #logo-title_footer{
     display: none;
   }
+
 }
-
-.menu::before {
-    content: ' ';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    border-radius: 4px;
-    background-color: #ffff;
-    bottom: 0;
-    left: 0;
-    transform-origin: center;
-    transform: scaleX(0);
-    transition: transform .6s ease-in-out;
-  }
-
-.menu:hover::before {
-  transform-origin: center;
-  transform: scaleX(1);
-}
-
-#icons{
-  position: absolute;
-  right: 4rem;
-  font-size: 1.5rem;
-}
-
-.fa {
-  padding: 18px;
-  text-align: right;
-  text-decoration: none;
-}
-
-.fa-facebook-square{
-  color: white;
-  transition: .6s ease-in-out;
-}
-
-.fa-facebook-square:hover{
-  color:#4267B2;
-  transition: .6s ease-in-out;
-}
-
-.fa-instagram {
-  color: white;
-  transition: .6s ease-in-out;
-}
-
-.fa-instagram:hover{
-   background:  #eccc68;
-   background:  radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  transition: .6s ease-in-out;
-}
-
-/* Twitter */
-.fa-twitter {
-  color: white;  
-  transition: .6s ease-in-out;
-}
-
-.fa-twitter:hover{
-  color: #55ACEE;
-  transition: .6s ease-in-out;
-}
-
-.fa-google{
-  color: white;
-  transition: .6s ease-in-out;
-}
-
-.fa-google:hover{
-  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  transition: .6s ease-in-out;
-}
-
-.img{
-  float: right;
-  margin-top: -25rem;
-}
-
-#logo-title{
-  font-family: 'Poiret One', cursive;
-  position: absolute;
-  top: 2rem;
-  left: 8rem;
-}
-
-.text{
-  text-align: justify;
-  margin: 10rem 10rem;
-}
-
-.text h1{
-  font-size: 5rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-}
-
-.text p{
-  font-size: 18px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  color: darkgray;
-  width: 25rem;
-}
-
-#search{
-  width: 30rem;
-  background: inherit;
-  color: #fff;
-  border: 1px solid #fff;
-  border-radius: 20px;
-  padding: .8rem 3rem;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-}
-
-#search:focus{
-  outline: none;
-  text-transform: uppercase;
-}
-
-::placeholder{
-  text-transform: none;
-}
-
-.fa-magnifying-glass{
-  position: absolute;
-  margin: 1.2rem 1rem;
-}
-
-#button{
-  background: none;
-  color: white;
-  border: 1px solid white;
-  border-radius: 30px;
-  padding: .8rem;
-  width: 10rem;
-  transition: .6s ease-in-out;
-  cursor: pointer;
-  border-color: #fff;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-}
-
-#button:hover{
-  background: white;
-  color: #000000;
-  transition: .6s ease-in-out;
-}
-
-.description{
-  float: right;
-  margin-left: 60rem;
-  margin-right: 10rem;
-  margin-top: -40rem;
-  width: 50rem;
-}
-
-.description h3{
-  font-weight: 200;
-  color: darkgray;
-}
-
-.description h1{
-  font-size: 4rem;
-  font-weight: 300;
-}
-
-.description h5{
-  font-weight: 500;
-}
-
-.description p{
-  color: darkgray;
-  text-align: justify;
-  
-}
-
-
-.img2{
-  float: left;
-  margin-left: 10rem;
-}
-
-.contact_info{
-    float: left;
-    margin-left: 10rem;
-    margin-right: 60rem;
-    margin-top: 15rem;
-    width: 50rem;
-}
-
-.contact_info h1{
-  font-size: 3.5rem;
-  font-weight: 300;
-}
-
-.contact_info h3{
-  font-weight: 200;
-  color: darkgray;
-}
-
-.icons{
-  font-family: 'Roboto', sans-serif;
-}
-
-.icons i{
-  font-size: 40px;
-}
-
-.icons p{
-  margin-top : -2.5rem;
-  margin-left: 4rem;
-  font-size: 18px;
-}
-#icons2{
-  font-size: 25px;
-}
-
-.footer{
-  background: #121212;
-  /* height: 10rem;
-  margin-top: 50rem; */
-}
-
-#logo-title_footer{
-  position: relative;
-  top: -6rem;
-  left: 9rem;
-  font-family: 'Poiret One', cursive;
-}
-
- .img3{
-  float: right;
-  margin-top: -35rem;
-  margin-right: 20rem;
- }
-
-
-@media only screen and (max-width: 768px){
- 
-      .navbar-nav{
-        margin-left: 5rem;
-       
-     }
-      #icons{
-        position: absolute;
-        right: 2rem;
-        font-size: 14px;
-      }
-      #logo-title{
-        display: none;
-      }
-      ul li a{
-        font-size: 12px;
-      }
-} 

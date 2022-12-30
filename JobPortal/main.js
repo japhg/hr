@@ -42,7 +42,7 @@ function multi_email() {
             emails: email_loop(email),
             subject: subject,
             message: message
-        },
+        },  
         success: function(data) {
             if (data == "success") {
                 $('#multi-responce').html("Successfully sent");
