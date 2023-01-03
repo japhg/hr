@@ -77,6 +77,12 @@ html, body{
     -webkit-text-fill-color: white;
 }
 
+#email2:-webkit-autofill,
+#email2:-moz-autofill,
+#email2:-ms-autofill,
+#email2:-o-autofill {
+  background-color: #ffa; /* Change the color of the autofill background */
+}
 /* For NavBar */
 .top-nav {
     display: flex;
@@ -274,7 +280,10 @@ ul li a{
     text-transform: uppercase;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
+    color: #ffffffbc;
 }
+
+
 /* For Smart Phone View */
 @media screen and (max-width: 768px){
     .menu-button-container {

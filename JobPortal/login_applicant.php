@@ -16,16 +16,21 @@ if(isset($_POST['login'])){
     $_SESSION['password'] = $row['password'];
     $hashedPassword = $row['password'];
 
-    if (password_verify($password, $hashedPassword)) {
+    if (password_verify($password, $hashedPassword)) 
+    {
 
       header("location: special_features.php");
       exit(0);
 
     }
+    else
+    {
+      $_SESSION['errorMessage'] = "Invalid Username or Password";
+    }
   }
 
-  else{
-
+  else
+  {
       $_SESSION['errorMessage'] = "Invalid Username or Password";
   }
 
@@ -123,7 +128,7 @@ if(isset($_POST['login'])){
                     <form class="row g-3 needs-validation" novalidate method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" name="email" id="floatingInput" placeholder="Email" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                        <input type="email" class="form-control" name="email" id="floatingInput" placeholder="Email" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" required>
                             <label for="floatingInput" style="color: #FFF">EMAIL ADDRESS</label>
                             <div class="invalid-feedback">
                               Please enter a Email Address.
@@ -131,7 +136,7 @@ if(isset($_POST['login'])){
                         </div>
  
                     <div class="form-floating">
-                        <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password" style="border: 1px solid black; background-color: inherit; border-top: none; border-left: none; border-right: none;" required>
+                        <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password" style="border: 1px solid black; background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" required>
                         <label for="floatingPassword" style="color: #fff">PASSWORD</label>
                         <div class="invalid-feedback">
                           Please enter a Password.
@@ -219,23 +224,3 @@ RESUME TABLE
 - a_id
 - resume attachement
 - date_posted -->
-
-<!-- <?php
-  // Check if the form has been submitted
-  // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  //   // Get the username, password, and remember me value from the form data
-  //   $username = $_POST['username'];
-  //   $password = $_POST['password'];
-  //   $remember = isset($_POST['remember']) ? $_POST['remember'] : 'off';
-
-  //   // Connect to the database and verify the credentials
-  //   $conn = new mysqli('localhost', 'db_user', 'db_pass', 'db_name');
-  //   $result = $conn->query("SELECT * FROM users WHERE username = '$username' AND password = '$password'");
-
-  //   // If a matching record was found, log the user in
-  //   if ($result->num_rows > 0) {
-  //     session_start();
-  //     $_SESSION['logged_in'] = true;
-  //     if ($remember === 'on') {
-  //       // Set a cookie to remember the login
-  //       setcookie('username', $ -->

@@ -94,7 +94,7 @@ include 'function.php';
                 <form action="searchresults.php" method="get"> 
                   <div class="search col-lg-8">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="search" name="search" id="search" class="form-control" placeholder="Job Title, City or Company">
+                    <input type="search" name="search" id="search" class="form-control" placeholder="Job Title, City or Company" style="box-shadow: none;">
                     <button type="submit" name="searchbtn" id="searchbtn">Search</button> 
                   </div>
               
@@ -126,7 +126,12 @@ include 'function.php';
               <img class="image__img" src="img/mema.jpg" alt="">
               <div class="image__overlay .image__overlay--blur">
               <div class="image__title"><?php echo $row['title'];?></div>
-                <a href="job_details.php" class="image__description">View Full Details</a>
+              <form action="job_details.php?<?php echo $row['job_id'];?>" method="get">
+                <input type="hidden" value="<?php echo $row['job_id'];?>" name="job_id">
+                <button type="submit" name="view" style="background: inherit; text-decoration: underline; border: none;">
+                View Full Details
+               </button>
+              </form>
               </div>
             </div>
             <div class="card-body">

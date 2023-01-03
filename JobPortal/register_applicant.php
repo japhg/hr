@@ -3,6 +3,7 @@ include 'connection.php';
 include 'function.php';
 
 session_start();
+$errors = array();
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
   $id = clean(mysqli_real_escape_string($con, $_POST['id']));
@@ -23,40 +24,47 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   $state = clean(mysqli_real_escape_string($con, $_POST["state"]));
   $zip = clean(mysqli_real_escape_string($con, $_POST["zip"]));
 
+  $email_check = "SELECT * FROM applicant_tbl WHERE email_address = '$email'";
+  $res = mysqli_query($con, $email_check);
+    if(mysqli_num_rows($res) > 0)
+    {
+      $errors['error'] = "Email Address is already exist!";
+    } 
+    else {
+      if (!empty($email) && !empty($hashedPassword) && !empty($firstname) && !empty($middlename) && !empty($lastname) && !empty($gender) && !empty($age) && !empty($mobile_number) && !empty($dob) && !empty($pob) && !empty($street) && !empty($barangay) && !empty($city) && !empty($state) && !empty($zip)) {
+        $sql = "SELECT id FROM applicant_tbl ORDER BY id DESC LIMIT 1";
+        $result = mysqli_query($con, $sql);
+        if (mysqli_num_rows($result) > 0) {
+          // If there are records in the table, get the highest primary key value
+          $row = mysqli_fetch_assoc($result);
+          $highest_key = $row['id'];
+          $number = (int) substr($highest_key, 1);
+          $number++;
+        } else {
+          // If there are no records in the table, start the primary key at 1
+          $number = 1;
+        }
 
-  if (!empty($email) && !empty($hashedPassword) && !empty($firstname) && !empty($middlename) && !empty($lastname) && !empty($gender) && !empty($age) && !empty($mobile_number) && !empty($dob) && !empty($pob) && !empty($street) && !empty($barangay) && !empty($city) && !empty($state) && !empty($zip)) {
-    $sql = "SELECT id FROM applicant_tbl ORDER BY id DESC LIMIT 1";
-    $result = mysqli_query($con, $sql);
-    if (mysqli_num_rows($result) > 0) {
-      // If there are records in the table, get the highest primary key value
-      $row = mysqli_fetch_assoc($result);
-      $highest_key = $row['id'];
-      $number = (int) substr($highest_key, 1);
-      $number++;
-    } else {
-      // If there are no records in the table, start the primary key at 1
-      $number = 1;
-    }
+        // Generate the primary key
+        $primary_key = "A" . str_pad($number, 5, "0", STR_PAD_LEFT);
 
-    // Generate the primary key
-    $primary_key = "A" . str_pad($number, 5, "0", STR_PAD_LEFT);
+        // Insert the record into the MySQL table
+        $query = "INSERT INTO applicant_tbl (id, email_address, password, firstname, middlename, lastname, gender, age, mobile_number, birthday, birthplace, street, barangay, city, states, zip)
+    VALUES ('$primary_key', '$email', '$hashedPassword', '$firstname', '$middlename', '$lastname', '$gender', '$age', '$mobile_number', '$dob', '$pob', '$street', '$barangay', '$city', '$state', '$zip')";
 
-    // Insert the record into the MySQL table
-    $query = "INSERT INTO applicant_tbl (id, email_address, password, firstname, middlename, lastname, gender, age, mobile_number, birthday, birthplace, street, barangay, city, states, zip)
-  VALUES ('$primary_key', '$email', '$hashedPassword', '$firstname', '$middlename', '$lastname', '$gender', '$age', '$mobile_number', '$dob', '$pob', '$street', '$barangay', '$city', '$state', '$zip')";
+        $results = mysqli_query($con, $query);
 
-    $results = mysqli_query($con, $query);
+        if ($results) {
+          // Record was successfully inserted
+          $_SESSION['email'] = $email;
+          $_SESSION['password'] = $password;
 
-    if ($results) {
-      // Record was successfully inserted
-      $_SESSION['email'] = $email;
-      $_SESSION['password'] = $password;
-
-      $_SESSION['message'] = "Successful register";
-      header("location: login_applicant.php");
-    } else {
-      // Insertion failed
-      echo "Registration Unsuccessful";
+          $_SESSION['message'] = "Successful register";
+          header("location: login_applicant.php");
+        } else {
+          // Insertion failed
+          echo "Registration Unsuccessful";
+        }
     }
   }
 }
@@ -138,7 +146,27 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             <img src="img/undraw_join_re_w1lh.svg" class="rounded" alt="..." id="bg">
         </div>
         <div class="container">
-  
+        <?php
+         if(count($errors) > 0)
+        { 
+        ?>
+        <?php
+    foreach($errors as $showerror)
+    {
+    ?>
+    <script> swal({
+            title: "Engk!",
+            text: "<?php echo $showerror?>",
+            icon: "error",
+            button: "Retry"
+          }) </script>
+          <?php
+    } 
+    
+?>
+<?php
+    }
+  ?>
             <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
               <div class="container">
                 <div class="row justify-content-left">
@@ -163,7 +191,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                         <form class="row g-3 needs-validation" novalidate method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
                         <input type="hidden" name="id" id="form-id" value="">
                             <div class="form-floating col-sm-12 col-md-12 col-lg-6">
-                              <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                              <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" required>
                               <label for="email" style="color: #FFF">EMAIL ADDRESS</label>
                               <div class="invalid-feedback">
                                 Please input Email Address.
@@ -171,7 +199,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             </div>
 
                             <div class="form-floating col-md-12 col-lg-6">
-                              <input type="password" class="form-control validate" name="password" id="password" placeholder="Password" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                              <input type="password" class="form-control validate" name="password" id="password" placeholder="Password" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                               <label for="password" style="color: #FFF">PASSWORD</label>
                               <div class="invalid-feedback">Please input Password.</div>
                             </div>
@@ -186,21 +214,21 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
                               <div class="form-floating  col-md-12 col-lg-4">
-                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" required>
                                 <label for="firstname" style="color: #FFF">FIRST NAME</label>
                                 <div class="invalid-feedback">
                                     Please input First Name.
                                 </div>
                               </div>
                               <div class="form-floating  col-md-12 col-lg-4">
-                                <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Middle Name" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;"required>
+                                <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Middle Name" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;"required>
                                 <label for="middlename" style="color: #FFF">MIDDLE NAME</label>
                                 <div class="invalid-feedback">
                                     Please input Middle Name.
                                   </div>
                               </div>
                               <div class="form-floating  col-md-12 col-lg-4">
-                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" required>
                                 <label for="lastname" style="color: #FFF">LAST NAME</label>
                                 <div class="invalid-feedback">
                                     Please input Last Name.
@@ -222,63 +250,63 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             </fieldset>
 
                             <div class="form-floating  col-md-12 col-lg-2">
-                                <input type="number" class="form-control" name="age" id="age" placeholder="Age" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                                <input type="number" class="form-control" name="age" id="age" placeholder="Age" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" required>
                                 <label for="age" class="form-label">AGE</label>
                                 <div class="invalid-feedback">
                                     Please input Age.
                                   </div>
                             </div>
                               <div class="form-floating  col-md-12 col-lg-4">
-                                <input type="number" class="form-control" name="mobile_number" id="mobile_number" placeholder="Mobile Number" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                                <input type="number" class="form-control" name="mobile_number" id="mobile_number" placeholder="Mobile Number" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" required>
                                 <label for="mobile_number" class="form-label">MOBILE NUMBER</label>
                                 <div class="invalid-feedback">
                                     Please input Mobile Number.
                                   </div>
                             </div>
                             <div class="form-floating col-md-12 col-lg-3">
-                              <input type="date" class="form-control" name="dob" id="dob" placeholder="Date of Birth" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                              <input type="date" class="form-control" name="dob" id="dob" placeholder="Date of Birth" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;" required>
                               <label for="dob" class="form-label">DATE OF BIRTH</label>
                               <div class="invalid-feedback">
                                 Please input Date of Birth.
                               </div>
                             </div>
                             <div class="form-floating  col-md-12 col-lg-3">
-                              <input type="text" class="form-control" name="pob" id="pob" placeholder="Place of Birth" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                              <input type="text" class="form-control" name="pob" id="pob" placeholder="Place of Birth" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;;box-shadow: none !important;;" required>
                               <label for="pob" class="form-label">PLACE OF BIRTH</label>
                               <div class="invalid-feedback">
                                 Please input Place of Birth.
                               </div>
                             </div>
                             <div class="form-floating  col-md-12 col-lg-7">  
-                              <input type="text" class="form-control" name="street" id="street" placeholder="Ex. 1234 Main St" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                              <input type="text" class="form-control" name="street" id="street" placeholder="Ex. 1234 Main St" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;;" required>
                               <label for="street" class="form-label">STREET</label>
                               <div class="invalid-feedback">
                                 Please input Street.
                               </div>
                             </div>
                               <div class="form-floating  col-md-12 col-lg-5">
-                                <input type="text" class="form-control" name="barangay" id="barangay" placeholder="Ex. Barangay Kaligayahan Quirino Highway, Novaliches" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                                <input type="text" class="form-control" name="barangay" id="barangay" placeholder="Ex. Barangay Kaligayahan Quirino Highway, Novaliches" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;;" required>
                                 <label for="barangay" class="form-label">BARANGAY</label>
                                 <div class="invalid-feedback">
                                     Please input Barangay.
                                   </div>
                             </div>
                               <div class="form-floating  col-md-12 col-lg-4">
-                                <input type="text" class="form-control" name="city" id="city" placeholder="Ex. Quezon City" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                                <input type="text" class="form-control" name="city" id="city" placeholder="Ex. Quezon City" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;;" required>
                                 <label for="city" class="form-label">CITY</label>
                                 <div class="invalid-feedback">
                                     Please input City.
                                   </div>
                             </div>
                             <div class="form-floating  col-md-12 col-lg-4">
-                              <input type="text" class="form-control" name="state" id="state" placeholder="Ex. Metro Manila, Philippines" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                              <input type="text" class="form-control" name="state" id="state" placeholder="Ex. Metro Manila, Philippines" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;;" required>
                               <label for="state" class="form-label">STATE</label>
                               <div class="invalid-feedback">
                                 Please input State.
                               </div>
                             </div>
                             <div class="form-floating  col-md-12 col-lg-4">
-                              <input type="number" class="form-control" name="zip" id="zip" placeholder="Ex. 1119" style="background-color: inherit; border-top: none; border-left: none; border-right: none; outline: none;" required>
+                              <input type="number" class="form-control" name="zip" id="zip" placeholder="Ex. 1119" style="background-color: inherit; border-top: none; border-left: none; border-right: none; box-shadow: none !important;;" required>
                               <label for="zip" class="form-label">ZIP CODE</label>
                               <div class="invalid-feedback">
                                 Please input Zip Code.

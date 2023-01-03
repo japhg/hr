@@ -87,6 +87,7 @@ include 'function.php';
           </nav>
           <br><br>
           <section>
+            <button type="button" class="btn btn-success" onclick="location.href = 'search_job.php';">Search Again</button>
           <div class="row" style="margin: 5rem;">
           <span>JOB OPENINGS</span>
           <p>107 of 507 JOBS</p>
@@ -97,7 +98,9 @@ include 'function.php';
               $query = "SELECT * FROM job_tbl WHERE title LIKE '%$search%' OR street LIKE '%$search%' OR barangay LIKE '%$search%' OR city LIKE '%$search%' OR state LIKE '%$search%'";
               $result = mysqli_query($con, $query);
               $queryResult = mysqli_num_rows($result);
-
+              ?>   
+               <span style="text-transform: uppercase;">Search Result for "<?php echo $search;?>"</span>         
+              <?php
                 if($queryResult > 0){
                   while ($row = mysqli_fetch_assoc($result)) {
                       ?>
@@ -107,7 +110,12 @@ include 'function.php';
               <img class="image__img" src="img/mema.jpg" alt="">
               <div class="image__overlay .image__overlay--blur">
               <div class="image__title"><?php echo $row['title']; ?></div>
-                <a href="job_details.php" class="image__description">View Full Details</a>
+              <form action="job_details.php?<?php echo $row['job_id'];?>" method="get">
+                <input type="hidden" value="<?php echo $row['job_id'];?>" name="job_id">
+                <button type="submit" name="view" style="background: inherit; text-decoration: underline; border: none;">
+                View Full Details
+               </button>
+              </form>
               </div>
             </div>
             <div class="card-body">
@@ -140,6 +148,26 @@ include 'function.php';
       <?php include 'footer.php';?>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

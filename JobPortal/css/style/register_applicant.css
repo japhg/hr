@@ -11,7 +11,7 @@
 }
 
 html, body{
-    background-image: linear-gradient(to right, #2d2d52,  #2d2d52, #2d2d52);
+    background-image: linear-gradient(to right, #fff,  #fff, #fff) !important;
     height: 100vh;
     font-family: 'Cera-Light', sans-serif !important;
 }
@@ -28,7 +28,7 @@ html, body{
     background: none !important;
     outline: none !important;
     color: #fff !important;
-    border-color: #6559ca !important;
+    box-shadow: none !important;
 }
 
 .form-control:-webkit-autofill,

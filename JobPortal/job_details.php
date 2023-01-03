@@ -1,6 +1,41 @@
 <?php
-  include 'connection.php';
-include 'function.php';
+include "connection.php";
+include "function.php";
+session_start();
+$errors = array();
+
+if(isset($_POST['login'])){
+  $email = clean(mysqli_real_escape_string($con, $_POST['email']));
+  $password = clean(mysqli_real_escape_string($con, $_POST['password']));
+
+  $query = "SELECT * FROM applicant_tbl WHERE email_address = '$email'";
+    $result = mysqli_query($con, $query);
+  if (mysqli_num_rows($result) > 0) {
+
+    $row = mysqli_fetch_assoc($result);
+    $_SESSION['email'] = $row['email_address'];
+    $_SESSION['password'] = $row['password'];
+    $hashedPassword = $row['password'];
+
+    if (password_verify($password, $hashedPassword)) 
+    {
+
+      header("location: special_features.php");
+      exit(0);
+
+    }
+    else
+    {
+      $errors['errorMessage'] = "Invalid Username or Password";
+    }
+  }
+
+  else
+  {
+      $errors['errorMessage'] = "Invalid Username or Password";
+  }
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,20 +113,162 @@ include 'function.php';
       <main>
           <div class="container">   
           <h2 style="font-family: 'Inter', san-serif; font-weight: 500;">JOB DETAILS</h2>
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <nav style="--bs-breadcrumb-divider:'>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php" style="color: #FFF;">Home</a></li>
               <li class="breadcrumb-item"><a href="search_job.php" style="color: #FFF;">Search Jobs</a></li>
               <li class="breadcrumb-item active" aria-current="page">Job Details</li>
             </ol>
           </nav>
-          <br><br>
+          <br><br><br><br>
         <section>
-          
+        <button class="btn btn-primary justify-content-right" style="float: right;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Apply Now</button>
+          <div class="container">
+            <?php
+            if (isset($_GET['view'])) {
+              $id = $_GET['job_id'];
+              $query = "SELECT *, DATE_FORMAT(date_posted, '%M %d, %Y')as formatted_date FROM job_tbl WHERE job_id = '$id'";
+              if ($result = mysqli_query($con, $query)) {
+
+                $row = mysqli_fetch_assoc($result);
+
+                ?>
+            <img src="img/mema.jpg" alt="" class="img-responsive" width="200px" height="200px">
+            <br><br>
+            <h1><?php echo $row['title']; ?></h1>
+            <h5>XYZ Company</h5>
+            <h6>ADDRESS: <?php echo $row['street'], ", ", $row['barangay'], ", ", $row['city'], ", ", $row['state']; ?></h6>
+            <h6>DATE POSTED: <?php echo $row['formatted_date']; ?></h6>
+            <br>
+            <hr>
+            <h5 style="font-weight: bold;">JOB DESCRIPTION</h5>
+            <p style="text-indent: 2rem; text-align: justify;  color: #ffffffbc;"><?php echo $row['description']; ?></p>
+            <br><br>
+            <h5 style="font-weight: bold;">JOB QUALIFICATIONS</h5>
+            <ul>
+              <li style="color: #ffffffbc;">
+                Candidate must possess at least a Bachelor's/College Degree , any field.
+              </li>
+              <li style="color: #ffffffbc;">
+                At least 3 year(s) of working experience in the related field is required for this position.
+              </li>
+              <li style="color: #ffffffbc;">
+                Preferably 1-4 Yrs Experienced Employees specializing in IT/Computer - Software or equivalent
+              </li>
+              <li style="color: #ffffffbc;">
+               Applicants must be willing to work in Tarlac area
+              </li>
+            </ul>
+            <br><br>                                                                
+            <h5 style="font-weight: bold;">SKILLS</h5>
+            <ul>
+              <li style="color: #ffffffbc;"><?php echo $row['skills'];?></li>
+            </ul>
+            <br><br>
+            <h5 style="font-weight: bold;">YEARS OF EXPERIENCE</h5>
+            <p style="color: #ffffffbc;"> - <?php echo $row['years'];?></p>
+            <br>  
+            <h5 style="font-weight: bold;">SALARY</h5>
+            <p style="color: #ffffffbc;"> - <?php echo $row['salary'];?></p>
+            <br>
+            <h5 style="font-weight: bold;">BENEFITS</h5>
+            <ul>
+              <li style="color: #ffffffbc;"><?php echo $row['benefits'];?></li>
+            </ul>
+            <br>
+            <h5 style="font-weight: bold;">JOB TYPE</h5>
+            <p style="color: #ffffffbc;"><?php echo $row['type'];?></p>
+            <br>
+            <hr>
+            <h4 style="font-weight: bold;">COMPANY INFORMATION</h4>
+            <br>
+            <h5 style="font-weight: bold;">COMPANY NAME</h5>
+            <p style="color: #ffffffbc;">XYZ Company</p>
+            <br><br>
+            <h5 style="font-weight: bold;">COMPANY ADDRESS</h5>
+            <p style="color: #ffffffbc;">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+            <br><br>            
+            <h5 style="font-weight: bold;">COMPANY DESCRIPTION</h5>
+            <p style="text-indent: 2rem; color: #ffffffbc;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde molestiae exercitationem totam iusto saepe! Incidunt pariatur excepturi dolores quae debitis illo. Recusandae dolorum, possimus eaque quos mollitia iste sit praesentium?</p>
+
+            <br><br>
+            <button class="btn btn-primary" id="apply-button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Apply Now</button>
+            
+         <?php }
+            }
+         
+         ?>
+          </div>
         </section>
         </div>
       </main>
-
+      <!-- Modal for login -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background: #2d2d52;">
+    <?php
+    if(count($errors) > 0){ ?>
+  <!--<div class="alert alert-danger alert-dismissile fade show text-center" id="danger-alert">-->
+  <div class="container">
+  <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" id="myAlert">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </svg>
+        <script>
+          $(document).ready(function () {
+            window.setTimeout(function() {
+              $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+                  $(this).remove(); 
+              });
+          }, 3000);
+          
+          });
+            </script>
+            <?php
+              foreach($errors as $showerror)
+              {
+                echo $showerror;
+              }
+          ?>
+            </div>
+              </div>
+            <?php
+              }
+            ?>    
+      <div class="modal-header" >
+        <br>
+      <h5 style="color: #fff; font-family: 'Roboto', sans-serif; font-weight: 800; text-align: center;">YOU NEED TO LOGIN FIRST BEFORE YOU APPLY FOR THIS JOB</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body " >
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" class="form-group needs-validation" novalidate autocomplete="off">
+        <div class="col-auto">
+          <label for="email" class="form-label" style="color: #fff;">Email</label>
+          <input type="email" class="form-control" name="email" id="email2" style="color: white; border-top: none; border-right: none; border-left: none; border-bottom: 1px solid white; box-shadow: none; background: #2d2d52;" required>
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="col-auto">
+          <label for="password" style="color: #fff;">Password</label>
+          <input type="password" class="form-control" name="password" id="password2" style="color: white; border-top: none; border-right: none; border-left: none; border-bottom: 1px solid white; box-shadow: none; background: #2d2d52;" required>
+          <div class="invalid-feedback">
+            Please enter a valid password.
+          </div>
+        </div>
+        <br><br>
+        <div class="col-auto">
+          <h6>Don't have an account yet? <a href="register_applicant.php" style="color: #fff;">Click here</a> to sign up.</h6>
+          <button type="submit" name="login" class="btn mb-3" style="background: #6559ca; color: white;">Login</button>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
       <br><br><br><br><br><br><br><br>
      
       <?php include 'footer.php';?>

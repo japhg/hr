@@ -64,13 +64,13 @@
         <h6>Start your Journey here. Find a Job that is suitable to you. <br> We offer a variety of job opportunities for job seekers of all experience levels.</h6>
         <br><br>
         <div class="container-fluid">
-          <button type="button" id="button">
-            <a href="search_job.php">Find Jobs Now</a>
+          <button type="button" id="button" onclick="location.href = 'search_job.php';">
+            Find Jobs Now
           </button> 
         </div>
       </div> 
       <div class="img">
-        <img src="img/man.png" alt="Photo by Kaylee Eden on Unsplash" width="1000rem" height="1049rem">
+        <img src="img/307993418_1170898090448688_2160080115147782767_n-removebg-preview.png" alt="Photo by Kaylee Eden on Unsplash" width="1000rem" height="1049rem">
       </div>
     </div>
   </main>
