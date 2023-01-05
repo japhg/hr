@@ -244,14 +244,14 @@ if(isset($_POST['login'])){
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" class="form-group needs-validation" novalidate autocomplete="off">
         <div class="col-auto">
           <label for="email" class="form-label" style="color: #fff;">Email</label>
-          <input type="email" class="form-control" name="email" id="email2" style="color: white; border-top: none; border-right: none; border-left: none; border-bottom: 1px solid white; box-shadow: none; background: #2d2d52;" required>
+          <input type="email" class="form-control" name="email" id="email2" style="color: white; border-top: none; border-right: none; border-left: none; border-bottom: 1px solid white; box-shadow: none; background: #2d2d52; border-color: #6559ca;" required>
           <div class="invalid-feedback">
             Please enter a valid email address.
           </div>
         </div>
         <div class="col-auto">
           <label for="password" style="color: #fff;">Password</label>
-          <input type="password" class="form-control" name="password" id="password2" style="color: white; border-top: none; border-right: none; border-left: none; border-bottom: 1px solid white; box-shadow: none; background: #2d2d52;" required>
+          <input type="password" class="form-control" name="password" id="password2" style="color: white; border-top: none; border-right: none; border-left: none; border-bottom: 1px solid white; box-shadow: none; background: #2d2d52; border-color: #6559ca;" required>
           <div class="invalid-feedback">
             Please enter a valid password.
           </div>

@@ -36,7 +36,7 @@ html, body{
   list-style-type: none;
   margin: 0;
   padding: 0;
-  margin-right: 43rem ;
+  margin-right: 43rem;
 }
 
 ul li a{
@@ -397,10 +397,7 @@ ul li a{
 
 
 /* FOR MOBILE PHONE */
-@media screen and (max-width: 768px) {
-  /* .top-nav{
-    margin-top: -210px;
-  } */
+@media screen and (max-width: 768px){
   .menu-button-container {
     display: flex;
   }
@@ -474,7 +471,6 @@ ul li a{
   .description{
     text-align: center;
     margin: 1rem;
-
     left: 0;
     right: 0;
   }
@@ -530,4 +526,60 @@ ul li a{
     display: none;
   }
 
+}
+
+/* For Tablet */
+@media screen and (min-width: 769px) and (max-width: 1668px){
+  .img, .img2{
+    display: none !important;
+  }
+  #icons{
+    display: none;
+  }
+  #logo{
+    width: 20%;
+  }
+  #logo-title{
+    display: none; 
+  }
+  .menu {
+    position: absolute;
+    left: 0;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .text{
+    text-align: center;
+    top: 13rem;
+    left: 0;
+  }
+  .text h1{
+    font-size: 4rem;
+    top: 0;
+    left: 0;
+  }
+  .text h6{
+    margin: 0 1rem 0 1rem;
+  }
+  .description{
+    text-align: center;
+    margin: 1rem;
+    left: 0;
+    right: 0;
+  }
+  .description h3{
+    font-size: 20px;
+  }
+  .description h1{
+    font-size: 38px;
+  }
+  .description h5{
+    font-size: 15px;
+  }
+  .description p{
+    font-size: 15px;
+    text-align: center;
+  }
 }

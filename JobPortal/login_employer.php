@@ -7,7 +7,7 @@ if(isset($_POST['login'])){
   $email = clean(mysqli_real_escape_string($con, $_POST['email']));
   $password = clean(mysqli_real_escape_string($con, $_POST['password']));
 
-  $query = "SELECT * FROM applicant_tbl WHERE email_address = '$email'";
+  $query = "SELECT * FROM employer_tbl WHERE email_address = '$email'";
     $result = mysqli_query($con, $query);
   if (mysqli_num_rows($result) > 0) {
 
@@ -19,7 +19,7 @@ if(isset($_POST['login'])){
     if (password_verify($password, $hashedPassword)) 
     {
 
-      header("location: special_features.php");
+      header("location: dashboard.php");
       exit(0);
 
     }
@@ -70,7 +70,7 @@ if(isset($_POST['login'])){
     <link rel="stylesheet" href="css/bootstrap.css">
     
 
-    <title>Login - Applicant</title>
+    <title>Login - Employer</title>
 
 </head>
 
@@ -81,7 +81,7 @@ if(isset($_POST['login'])){
       <script>
        swal({
             title: "<?php echo $_SESSION['message'];?>",
-            text: '<?php echo "HEelo"?>',
+            text: '<?php echo "Helo"?>',
             icon: 'success',
             button: "OK"
             })
@@ -99,7 +99,7 @@ if(isset($_POST['login'])){
 
     <main>
       <div class="row justify-content-right" style="width: 100vh;"></div>
-        <img src="img/undraw_experience_design_re_dmqq.svg" class="rounded" alt="..." id="bg">
+        <img src="img/undraw_personal_information_re_vw8a.svg" class="rounded" alt="..." id="bg">
       </div>
       <div class="container">
   
@@ -154,7 +154,7 @@ if(isset($_POST['login'])){
                         <button class="btn w-100" type="submit" name="login" style="background: #6559ca; color: white;">Login</button>
                       </div>
                       <div class="col-12">
-                        <p class="small mb-0" style="color: #fff;">Don't have account?  <a href="register_applicant.php" style="color: #6559ca; ">Create an account</a></p>
+                        <p class="small mb-0" style="color: #fff;">Don't have account?  <a href="register_employer.php" style="color: #6559ca; ">Create an account</a></p>
                       </div>
                       <br><br>
                       <div class="col-12">

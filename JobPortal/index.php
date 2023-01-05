@@ -33,7 +33,7 @@
 </head>
 
 <body id="home">
-  <?php include 'loader.php';?>
+  <!-- <?php include 'loader.php';?> -->
   <header class="top-nav">
     <div>
     <img src="img/hrlogo.png" alt="HR Logo" class="img-responsive" width="45%" id="logo" style="margin-top: 1rem; margin-bottom: 1rem;">
@@ -72,7 +72,7 @@
         </div>
       </div> 
       <div class="img">
-        <img src="img/307993418_1170898090448688_2160080115147782767_n-removebg-preview.png" alt="Photo by Kaylee Eden on Unsplash" width="1000rem" height="1049rem">
+        <img src="img/undraw_profile_re_4a55.svg" alt="Photo by Kaylee Eden on Unsplash" width="850rem" height="1049rem" style="margin-right: 1rem;">
       </div>
     </div>
   </main>
@@ -83,7 +83,7 @@
         <div class="contain">
           <div class="about" id="about" style="background-image: url('img/galax.jpg'); background-size: cover; height: 100vh">
             <div class="img2">
-              <img src="img/Man with laptop.gif" alt="Man with Laptop" >
+              <img src="img/undraw_team_spirit_re_yl1v.svg" alt="Man with Laptop" >
             </div>
             <div class="description">
               <h3>Who Are We?</h3>
@@ -144,9 +144,6 @@
                   </ul>
                 </div>
             </div>
-            <div class="img3">
-              <img src="img/Shakehands.png" alt="Shakehands" width="350rem">
-            </div>
           </div>
         </div>
       </section>
@@ -163,7 +160,7 @@
       <div class="modal-body " >
         <button type="button"  style="background: #2d2d52; width: 14rem; border: 1px solid #2d2d52; padding: 5px;">
           <i class="fa-solid fa-user-tie"></i>
-          <a href="#" style="color: #fff; font-family: 'Roboto', sans-serif;">EMPLOYER</a>
+          <a href="register_employer.php" style="color: #fff; font-family: 'Roboto', sans-serif;">EMPLOYER</a>
         </button>
         <button type="button"  style="background: #2d2d52; width: 14rem; border: 1px solid #2d2d52; padding: 5px;">
           <i class="fa-solid fa-user"></i>
@@ -189,7 +186,7 @@
       <div class="modal-body " >
         <button type="button"  style="background: #2d2d52; width: 14rem; border: 1px solid #2d2d52; padding: 5px;">
           <i class="fa-solid fa-user-tie"></i>
-          <a href="#" style="color: #fff; font-family: 'Roboto', sans-serif;">EMPLOYER</a>
+          <a href="login_employer.php" style="color: #fff; font-family: 'Roboto', sans-serif;">EMPLOYER</a>
         </button>
         <button type="button"  style="background: #2d2d52; width: 14rem; border: 1px solid #2d2d52; padding: 5px;">
           <i class="fa-solid fa-user"></i>
@@ -275,10 +272,9 @@
   <div class="footer_credit" style="text-align: center; background: #131313;">
    <p style="color: #ADADAD;">Copyright &copy; 2023. All rights Reserved. <br>Developed by <a href="https://www.facebook.com/Jpgomera19/" target="_blank" style="color: #6559ca;">James Philip Gomera</a></p>
   </div>
-
  </footer>
 
-  <?php include 'footer.php';?>
+  <!-- <?php include 'footer.php';?> -->
   <script src="js/bootstrap.js"></script> 
 </body>
 </html>

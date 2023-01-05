@@ -1,14 +1,18 @@
-<?php
+<!-- <?php
+session_start();
   include 'connection.php';
   include 'function.php';
-?>
 
+
+if (isset($_SESSION['email'], $_SESSION['password'])) {
+  ?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="refresh" content="15; url=login_employer.php"> -->
     <link rel="shortcut icon" href="img/hrlogo.png" type="image/x-icon">
 
     <!-- Icons -->
@@ -50,112 +54,157 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     
     <link rel="stylesheet" href="css/style/search_job.css">
+    <link rel="stylesheet" href="css/style/dashboard.css">
     <link rel="stylesheet" href="css/style/footer.css">
     <link rel="stylesheet" href="css/style/loader.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     
 
-    <title>Search Available Jobs</title>
+    <title>Dashboard</title>
 
 </head>
 <body>
-  <?php include 'loader.php';?>
+  <!-- <?php include 'loader.php';?> -->
   <header class="top-nav">
     <div>
-    <img src="img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
-    <h1 id="logo-title">JOB PORTAL</h1>
+      <img src="img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
+      <h1 id="logo-title">JOB PORTAL</h1>
     </div>
     <input id="menu-toggle" type="checkbox" />
-    <label class='menu-button-container' for="menu-toggle">
-    <div class='menu-button'></div>
-  </label>
+      <label class='menu-button-container' for="menu-toggle">
+        <div class='menu-button'></div>
+      </label>
     <ul class="menu position-absolute top-50 start-50 translate-middle">
-    <li><a class="active" href="index.php">HOME</a></li>
-    <li><a href="#about">ABOUT</a></li>
-    <li><a href="#contact">CONTACT</a></li>
+      <li><a class="active" href="dashboard.php">DASHBOARD</a></li>
+      <li><a href="#about">MANAGE JOBS</a></li>
+      <li><a href="#contact">POST A JOB</a></li>
+      <li><a href="dashboard.php">PROFILE</a></li>
+      <li><a href="logout.php">LOGOUT</a></li>
     </ul>
   </header>
 <br><br><br><br><br><br><br><br>
       <main>
-          <div class="container">   
-          <h2 style="font-family: 'Inter', sans-serif; font-weight: 500;">JOB VACANCIES </h2>
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <div class="container mt-6">   
+        <div class="pagetitle">
+          <h1>Dashboard</h1>
+          <nav>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.php" style="color: #FFF;">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Search Jobs</li>
+              <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </nav>
-          <br><br>
-          <section>
-              <div class="row justify-content-center">
-                <h4>Find jobs here</h4>
-                <h6>You may search by Job title, Work Location(street, barangay, city, state), and Company Name.</h6>
-                <br>
-                <form action="searchresults.php" method="get"> 
-                  <div class="search col-lg-8">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="search" name="search" id="search" class="form-control" placeholder="Job Title, City or Company" style="box-shadow: none;">
-                    <button type="submit" name="searchbtn" id="searchbtn">Search</button> 
-                  </div>
-              
-                </form>
+        </div>
+        <!-- End Page Title -->
+
+        <div class="row">
+         
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card">
+
+            <div class="card-body">
+              <h5 class="card-title">POSTED <span>| JOBS</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-cart"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>145</h6>
+                </div>
               </div>
-          </section>
+            </div>
+
+          </div>
+        </div><!-- End Sales Card -->
+
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card sales-card">
+
+            <div class="card-body">
+              <h5 class="card-title">CLOSED <span>| JOBS</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-cart"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>145</h6>
+                  <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- End Sales Card -->
+
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card sales-card">
+
+            <div class="card-body">
+              <h5 class="card-title">EXPIRED <span>| JOBS</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-cart"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>145</h6>
+                  <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- End Sales Card -->
+
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card sales-card">
+
+            <div class="card-body">
+              <h5 class="card-title">OTHER <span>| JOBS</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-cart"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>145</h6>
+                  <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- End Sales Card -->
+
+
+
+
+
+
+
+
 
         </div>
       </main>
 
-      <br><br><br><br><br><br><br><br>
-      <section>
-    
-          <div class="row" style="margin: 5rem;">
-          <span>JOB OPENINGS</span>
-          <p>107 of 507 JOBS</p>
-          <hr>
-          <?php
-      $query = "SELECT * FROM job_tbl";
-      $result = mysqli_query($con, $query);
-      if(mysqli_num_rows($result))
-      {
-        while($row = mysqli_fetch_assoc($result))
-        {
-    ?>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-          <div class="card" style="width: 100%;">
-            <div class="image">
-              <img class="image__img" src="img/mema.jpg" alt="">
-              <div class="image__overlay .image__overlay--blur">
-              <div class="image__title"><?php echo $row['title'];?></div>
-              <form action="job_details.php?<?php echo $row['job_id'];?>" method="get">
-                <input type="hidden" value="<?php echo $row['job_id'];?>" name="job_id">
-                <button type="submit" name="view" style="background: inherit; text-decoration: underline; border: none;">
-                View Full Details
-               </button>
-              </form>
-              </div>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"><?php echo $row['title'];?></h5>
-              <p class="card-text">Company: XYZ Company</p>
-              <p class="card-text">Address: <?php echo $row['street'],", ",$row['barangay'],", ",$row['city'],", ",$row['state'];?></p>
-              <p class="card-text">Salary: <?php echo $row['salary'];?></p>
-            </div>
-          </div>
-          </div>
-          <?php
-      }
-    }
-    ?> 
-  
-  
-        </div>      
-      </section>
-      <?php include 'footer.php';?>
+<br><br><br><br><br><br><br><br>
+     
+      <!-- <?php include 'footer.php'; ?> -->
 </body>
 </html>
-
-
-
+<!-- <?php 
+  }
+  else{
+    header("location:index.php");
+    session_destroy();
+  }
+  unset($_SESSION['prompt']);
+  mysqli_close($con);
+?> -->
 
 
 

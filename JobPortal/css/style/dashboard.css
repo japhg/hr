@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+  }
+  
+.card-body{
+    background: #282845 !important;
+    backdrop-filter: blurd(10px);
+	box-shadow: 5px 10px 20px rgba(0,0,0,.6);
+}
+
+h5{
+    color: #6559ca !important;
+}
