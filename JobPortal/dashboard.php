@@ -1,11 +1,11 @@
-<!-- <?php
+<?php
 session_start();
   include 'connection.php';
   include 'function.php';
 
 
 if (isset($_SESSION['email'], $_SESSION['password'])) {
-  ?> -->
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +64,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 </head>
 <body>
-  <!-- <?php include 'loader.php';?> -->
+  <?php include 'loader.php';?>
   <header class="top-nav">
     <div>
       <img src="img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
@@ -193,7 +193,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 <br><br><br><br><br><br><br><br>
      
-      <!-- <?php include 'footer.php'; ?> -->
+      <?php include 'footer.php'; ?> 
 </body>
 </html>
 <!-- <?php 
@@ -204,7 +204,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
   }
   unset($_SESSION['prompt']);
   mysqli_close($con);
-?> -->
+?>
 
 
 

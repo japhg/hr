@@ -33,7 +33,7 @@
 </head>
 
 <body id="home">
-  <!-- <?php include 'loader.php';?> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                
   <header class="top-nav">
     <div>
     <img src="img/hrlogo.png" alt="HR Logo" class="img-responsive" width="45%" id="logo" style="margin-top: 1rem; margin-bottom: 1rem;">
