@@ -7,11 +7,12 @@
     padding: 0;
     margin: 0;
     box-sizing: content-box;
-    font-family: 'Cera-Light', sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
+    
 }
 
 html, body{
-    background-image: linear-gradient(to right, #2d2d52,  #2d2d52, #2d2d52);
+    background-image: linear-gradient(to right, #fff,  #fff, #fff) !important;
     height: 100vh;
 }
 
@@ -24,29 +25,33 @@ html, body{
 }
 
 .form-control{
-    background: none !important;
+    background: none !important; 
+    box-shadow: none !important;
     outline: none !important;
-    color: #fff !important;
-    border-color: #6559ca !important;
-}
-
-.form-control:focus {           
-    border-color: #6559ca !important;
-    outline: #6559ca !important;
-}
+    color: #000 !important;
+}           
 
 .form-control:-webkit-autofill,
 .form-control:-webkit-autofill:hover,
 .form-control:-webkit-autofill:focus,
 .form-control:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
-    -webkit-text-fill-color: white;
+    -webkit-text-fill-color: #000 !important;
+}
+
+#row{
+    justify-content: left !important;
 }
 
 #bg{
+    justify-content: left !important;
     position: absolute;
-    right: 0;
-    top: 20rem;
+    left: 0;
+    top: 0 !important;
+}
+
+a:hover{
+    color: red !important;
 }
 
 /* For Mobile Phone */ 
@@ -56,13 +61,5 @@ html, body{
     }
 }
 
-/* For Tablet */
-@media screen and (min-width: 767px) and (max-width: 1023px){
-    #bg{
-        display: none;
-    }
-    .row{
-        justify-content: center;
-    }
-}
+
  

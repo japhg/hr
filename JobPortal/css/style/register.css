@@ -10,9 +10,11 @@
 }
 
 html, body{
-    background-image: linear-gradient(to right, #2d2d52,  #2d2d52, #2d2d52) !important;
+    background-image: linear-gradient(to right, #fff,  #fff, #fff) !important;
     height: 100vh;
-    font-family: 'Cera-Light', sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
+ 
+    
 }
 
 .logo{
@@ -26,7 +28,7 @@ html, body{
 .form-control{
     background: none !important;
     outline: none !important;
-    color: #fff !important;
+    color: #000 !important;
     box-shadow: none !important;
     border-color: #6559ca !important;
 }
@@ -36,7 +38,7 @@ html, body{
 .form-control:-webkit-autofill:focus,
 .form-control:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
-    -webkit-text-fill-color: white;
+    -webkit-text-fill-color: #000 !important;
 }
 
 #bg{
@@ -49,6 +51,10 @@ html, body{
     position: absolute;
     right: 0 !important;
     top: 15rem;
+}
+
+a:hover{
+    color: red !important;
 }
 
 /* For Mobile Phone */

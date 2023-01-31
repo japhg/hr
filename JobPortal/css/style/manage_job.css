@@ -1,0 +1,335 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+html, body{
+    background-image: linear-gradient(to right, #fff,  #fff, #fff);
+    height: 100vh;
+}
+
+/* For NavBar */
+.top-nav {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    color: #6559ca;
+    height: 80px;
+    padding: 1rem;
+    z-index: 1;
+}
+  
+.menu {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+  
+ul li a{
+    color: #000;
+    text-decoration: none;
+    transition: .6s ease-in-out;
+}
+  
+.active, .menu li a:hover{
+    color: #6559ca;
+}
+  
+.menu > li {
+    margin: 0 1rem;
+    overflow: hidden;
+}
+  
+.menu-button-container {
+    display: none;
+    height: 100%;
+    width: 30px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+#menu-toggle {
+    display: none;
+}
+  
+.menu-button,
+.menu-button::before,
+.menu-button::after {
+    display: block;
+    background-color: #000;
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
+}
+  
+.menu-button::before {
+    content: '';
+    margin-top: -8px;
+}
+  
+.menu-button::after {
+    content: '';
+    margin-top: 8px;
+}
+  
+#menu-toggle:checked + .menu-button-container .menu-button::before {
+    margin-top: 0px;
+    transform: rotate(405deg);
+}
+  
+#menu-toggle:checked + .menu-button-container .menu-button {
+    background: rgba(255, 255, 255, 0);
+}
+  
+#menu-toggle:checked + .menu-button-container .menu-button::after {
+    margin-top: 0px;
+    transform: rotate(-405deg);
+}
+
+.menu::before {
+    content: ' ';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    border-radius: 4px;
+    background-color: #6559ca;
+    bottom: 0;
+    left: 0;
+    transform-origin: center;
+    transform: scaleX(0);
+    transition: transform .6s ease-in-out;
+}
+
+.menu:hover::before {
+  transform-origin: center;
+  transform: scaleX(1);
+}
+
+#logo{
+    width: 3%;
+    position: absolute;
+    top: .5rem;
+    left: 1rem;
+}
+
+#logo-title{
+    font-family: 'Poiret One', cursive !important;
+    position: absolute;
+    top: 1rem;
+    left: 5.5rem;
+    color: #000;
+}
+
+.img-circle{
+    flex: none;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover; 
+    backdrop-filter: blurd(10px) !important; 
+    box-shadow: 5px 10px 20px rgba(0,0,0,.3) !important;
+}
+
+#update{
+    border: 1px solid #121212 !important;
+    border-radius: 50px !important;
+    transition: .4s ease-in-out;
+    box-shadow: none !important;
+}
+
+#update:hover{
+    background: #198754;
+    color: #fff;
+    border: 1px solid #198754 !important;
+}
+
+.delete_btn_ajax{
+    border: 1px solid #121212 !important;
+    border-radius: 50px !important;
+    transition: .4s ease-in-out !important;
+    box-shadow: none !important;
+}
+
+.delete_btn_ajax:hover{
+    background: #dc3545;
+    color: #fff !important;
+    border: 1px solid #dc3545 !important;
+}
+
+.close_btn_ajax, .open_btn_ajax{
+    border: 1px solid #121212 !important;
+    border-radius: 50px !important;
+    transition: .4s ease-in-out !important;
+    box-shadow: none !important;
+}
+
+.close_btn_ajax:hover{
+    background: #121212;
+    color: #fff !important;
+    border: 1px solid #121212 !important;
+}
+
+.open_btn_ajax:hover{
+    background: #121212;
+    color: #fff !important;
+    border: 1px solid #121212 !important;
+}
+
+
+.info ul li{
+    list-style: none;
+    text-align: justify;
+    display: block;
+    padding-right: 5rem;
+    font-size: 18px;
+}
+
+table tr td{
+    border-bottom: 1px solid black;
+}
+
+ol li a{
+    color: #000 !important;
+}
+
+.form-control, .form-select{
+    background-color: inherit; 
+    border-top: none !important; 
+    border-left: none !important; 
+    border-right: none !important; 
+    box-shadow: none !important; 
+    border-color: #6559ca !important;
+}
+
+#textArea{
+    background-color: inherit; 
+    border-top: 1px solid #6559ca !important; 
+    border-left: 1px solid #6559ca !important; 
+    border-right: 1px solid #6559ca !important; 
+    box-shadow: 1px solid #6559ca !important; 
+    border-color: #6559ca !important;
+}
+
+#label{
+    font-weight: 600;
+}
+
+#form{
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid black;
+}
+
+/* For Smart Phone View */
+@media screen and (max-width: 768px){
+    .menu-button-container {
+      display: flex;
+    }
+    .menu {
+      position: absolute;
+      top: 0;
+      margin-top: 135px;
+      left: 0;
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    #menu-toggle ~ .menu li {
+      height: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    #menu-toggle:checked ~ .menu li {
+      border: 1px solid #fff;
+      height: 2.5em;
+      padding: 0.5em;
+      transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .menu > li {
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0.5em 0;
+      width: 100%;
+      color: #000;
+      background-color: rgb(42, 42, 42);
+    }
+    .menu > li:not(:last-child) {
+      border-bottom: 1px solid #000;
+    }
+    .menu li a{
+        color: rgb(212, 212, 212) !important;
+    }
+    #icons{
+      display: none;
+    }
+    #logo{
+        width: 10%;
+    }
+    #logo-title{
+       display: none;
+    }
+    .info ul{
+        text-align: left;
+        margin-top: 1rem;
+    }
+    .info ul li{
+        text-align: left;
+    }
+}
+
+@media screen and (min-width: 249px) and (max-width: 652px){
+    #logo{
+        width: 10%;
+    }
+    #logo-title{
+      display: none;
+    }
+}
+
+/* For Tablet View */
+
+@media screen and (min-width: 769px) and (max-width: 1023px){
+    #logo{
+        width: 7%;
+       
+    }
+    #logo-title{
+        font-size: 20px;
+        left: 5rem;
+        top: 1.5rem;
+    }
+    .menu {
+        position: absolute;
+        left: 0;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu ul li{
+        left: -15rem;
+    }
+    .info ul{
+        text-align: left;
+    }
+    .info ul li{
+        display: inline-block;
+    }
+}
