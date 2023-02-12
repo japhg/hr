@@ -1,5 +1,5 @@
 <?php
-require "connection.php";
+require "../database/connection.php";
 session_start();
 $errors = array();
 

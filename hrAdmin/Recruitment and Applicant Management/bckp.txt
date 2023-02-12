@@ -1,0 +1,73 @@
+
+        <?php 
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
+        // The URL of the Tika Server API
+        $tika_url = "http://localhost:9998/tika";
+
+        // The path of the file to extract text from
+        $file_path = "../ResumeJames.docx";
+
+        // Read the file contents into a variable
+        $file = file_get_contents($file_path);
+
+        // Get the MIME type of the file
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime_type = finfo_file($finfo, $file_path);
+        finfo_close($finfo);
+
+        // Create a cURL session
+        $ch = curl_init();
+
+        // Set the URL and other options for the cURL session
+        curl_setopt($ch, CURLOPT_URL, $tika_url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Accept: text/plain",
+            "Content-Type: $mime_type"
+        ));
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $file);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Execute the cURL session
+        $content = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        // Close the cURL session
+        curl_close($ch);
+        
+
+        // Check the HTTP status code
+        if ($status_code == 200) {
+        // Extract the name
+        preg_match("/[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+\s/", $content, $name_matches);
+        $name = $name_matches[0] ?? "Name not found";
+
+        // Extract the email address
+        preg_match("/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/", $content, $email_matches);
+        $email = $email_matches[0] ?? "Email not found";
+
+        // Extract the phone number
+        preg_match('/\+63\d{10}|0\d{10}/', $content, $phone_matches);
+        $phone = $phone_matches[0] ?? "Phone not found";
+
+        preg_match_all("/(Work Experience|WORK EXPERIENCE|WORK EXPERIENCE:)/is", $content, $work_matches);
+        $work = implode("\n", $work_matches[0]) ?? "Work experience not found";
+
+        preg_match_all("/(Education|EDUCATION|EDUCATION:)/is", $content, $education_matches);
+        $education = implode("\n", $education_matches[0]) ?? "Education not found";
+
+        preg_match_all("/(Skills|SKILLS|SKILLS:).*?(?=$)/is", $content, $skills_matches);
+        $skills = implode("\n", $skills_matches[0]) ?? "Skills not found";
+
+        // Display the extracted information
+        echo "Name: " . $name . "\n";
+        echo "Email: " . $email . "\n";
+        echo "Phone: " . $phone . "\n";
+        echo "Work Experience:\n" . $work . "\n";
+        echo "Education:\n" . $education . "\n";
+        echo "Skills:\n" . $skills . "\n";
+
+        }   
+        ?>

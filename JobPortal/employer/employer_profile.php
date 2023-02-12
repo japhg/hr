@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'connection.php';
-include 'function.php';
+include '../database/connection.php';
+include '../body/function.php';
 
 if (isset($_POST['update'])) {
   $id = $_POST['id'];
@@ -56,7 +56,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta http-equiv="refresh" content="15; url=login_employer.php"> -->
-    <link rel="shortcut icon" href="img/hrlogo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/hrlogo.png" type="image/x-icon">
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -87,18 +87,85 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 
     <!-- <link rel="stylesheet" href="css/style/search_job.css"> -->
-    <link rel="stylesheet" href="css/style/profile.css">
-    <link rel="stylesheet" href="css/style/footer.css">
-    <link rel="stylesheet" href="css/style/loader.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style/header.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
 
 
     <title>Profile</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif !important;
+      }
 
+      html,
+      body {
+        background-image: linear-gradient(to right, #fff, #fff, #fff);
+        height: 100vh;
+      }
+
+
+      .img-circle {
+        flex: none;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        backdrop-filter: blurd(10px) !important;
+        box-shadow: 5px 10px 20px rgba(0, 0, 0, .3) !important;
+      }
+
+      #profilebtn {
+        background: #6559ca !important;
+        color: #fff !important;
+        box-shadow: none !important;
+      }
+
+      .info ul li {
+        list-style: none;
+        text-align: justify;
+        display: block;
+        padding-right: 5rem;
+        font-size: 18px;
+      }
+
+      table tr td {
+        border-bottom: 1px solid black;
+      }
+
+      /* For Smart Phone View */
+      @media screen and (max-width: 768px) {
+        .info ul {
+          text-align: left;
+          margin-top: 1rem;
+        }
+
+        .info ul li {
+          text-align: left;
+        }
+      }
+
+
+      /* For Tablet View */
+
+      @media screen and (min-width: 769px) and (max-width: 1023px) {
+        .info ul {
+          text-align: left;
+        }
+
+        .info ul li {
+          display: inline-block;
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <?php include 'loader.php'; ?>
+    <?php
+    include '../body/loader.php';
+    include '../body/employer_header.php'; ?>
 
     <!--Modal-->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -131,25 +198,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
       </div>
     </div>
 
-    <header class="top-nav">
 
-      <div>
-        <img src="img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
-        <h1 id="logo-title">JOB PORTAL</h1>
-      </div>
-      <input id="menu-toggle" type="checkbox" />
-      <label class='menu-button-container' for="menu-toggle">
-        <div class='menu-button'></div>
-      </label>
-      <ul class="menu position-absolute top-50 start-50 translate-middle">
-        <li><a href="dashboard.php">DASHBOARD</a></li>
-        <li><a href="manage_jobs.php">MANAGE JOBS</a></li>
-        <li><a href="postJob.php">POST A JOB</a></li>
-        <li><a class="active" href="employer_profile.php">PROFILE</a></li>
-        <li><a href="logout.php">LOGOUT</a></li>
-      </ul>
-
-    </header>
     <br><br><br><br><br><br><br><br>
     <main>
       <div class="container mt-12">
@@ -176,8 +225,8 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
             ?>
               <center>
-                <img alt="Profile Picture" class="img-circle" <?php echo '<img src="imageStorage/' . $image . '" />'; ?> <br><br>
-                <button type="button" class="btn" style="background: #6559ca; color: #fff; border: none;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Update Picture</button>
+                <img alt="Profile Picture" class="img-circle" <?php echo '<img src="../imageStorage/' . $image . '" />'; ?> <br><br>
+                <button type="button" class="btn" id="profilebtn" style="background: #6559ca; color: #fff; border: none;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Update Picture</button>
               </center>
             <?php } ?>
             <div class="info">
@@ -218,18 +267,18 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.min.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.min.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/chart.js/chart.min.js"></script>
+    <script src="../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../assets/vendor/quill/quill.min.js"></script>
+    <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-    <?php include 'footer.php'; ?>
+    <script src="../assets/js/main.js"></script>
+    <?php include '../body/footer.php'; ?>
   </body>
 
   </html>

@@ -206,7 +206,7 @@ if (isset($_POST['login'])) {
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
-  <?php include 'footer.php'; ?>
+  <?php include '../body/footer.php'; ?>
 </body>
 
 </html>

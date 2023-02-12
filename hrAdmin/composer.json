@@ -1,0 +1,9 @@
+{
+    
+    "require": {
+    "yidas/pagination": "^1.0",
+    "phpmailer/phpmailer": "^6.7",
+    "vaites/php-apache-tika": "^1.2",
+    "firebase/php-jwt": "^5.0"
+    }
+}

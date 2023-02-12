@@ -56,8 +56,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../css/style/search_results.css">
-    <link rel="stylesheet" href="../css/style/footer.css">
-    <link rel="stylesheet" href="../css/style/loader.css">
+    <link rel="stylesheet" href="../css/style/header.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
 
 
@@ -66,25 +65,12 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
   </head>
 
   <body>
-    <?php include '../body/loader.php'; ?>
-    <header class="top-nav">
-      <div>
-        <img src="../img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
-        <h1 id="logo-title">JOB PORTAL</h1>
-      </div>
-      <input id="menu-toggle" type="checkbox" />
-      <label class='menu-button-container' for="menu-toggle">
-        <div class='menu-button'></div>
-      </label>
-      <ul class="menu position-absolute top-50 start-50 translate-middle">
-        <li><a href="dashboard.php">DASHBOARD</a></li>
-        <li><a href="manage_jobs.php">MANAGE JOBS</a></li>
-        <li><a class="active" href="postJob.php">POST A JOB</a></li>
-        <li><a href="employer_profile.php">PROFILE</a></li>
-        <li><a href="logout.php">LOGOUT</a></li>
-      </ul>
-    </header>
-
+    <?php 
+    include '../body/loader.php'; 
+    include '../body/employer_header.php';
+    ?>
+    
+    <br><br><br><br><br><br><br><br>
     <div class="main">
       <?php
       if (isset($_SESSION['errorMessage'])) { ?>

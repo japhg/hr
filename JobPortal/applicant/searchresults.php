@@ -60,7 +60,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 <body>
   <?php include '../body/loader.php';
-  // include '../body/header.php'; ?>
+  include 'page/header.php'; ?>
 
   <br><br><br><br><br><br><br><br>
 
@@ -69,8 +69,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
       <h1 style="font-family: 'Roboto', sans-serif; color: #6559ca; font-weight: 800;">SEARCH RESULTS</h1>
       <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php" style="color: #000;">Home</a></li>
-          <li class="breadcrumb-item"><a href="search_job.php" style="color: #000;">Search Jobs</a></li>
+          <li class="breadcrumb-item"><a href="../../../hr/JobPortal/applicant/searchjob.php" style="color: #000;">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Search Jobs Results</li>
         </ol>
       </nav>
@@ -80,38 +79,54 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
   <div class="body">
     <div class="container">
-      <button type="button" class="btn" onclick="location.href = 'search_job.php';" style="background: #6559ca; color: #fff; border: none; box-shadow: none;">Search Again</button>
+      <button type="button" class="btn" onclick="location.href = '../../../hr/JobPortal/applicant/searchjob.php';" style="background: #6559ca; color: #fff; border: none; box-shadow: none;">Search Again</button>
       <div class="row" style="margin: 5rem;">
         <span>JOB OPENINGS</span>
         <hr>
         <?php
         if (isset($_GET['searchbtn'])) {
           $search = clean(mysqli_real_escape_string($con, $_GET['search']));
-          $query = "SELECT e.*, j.*, DATE_FORMAT(date_posted, '%M %d, %Y')as formatted_date FROM employer_tbl e, job_tbl j WHERE e.id = j.empr_id AND title LIKE '%$search%' OR (e.id = j.empr_id AND street LIKE '%$search%') OR (e.id = j.empr_id AND barangay LIKE '%$search%') OR (e.id = j.empr_id AND city LIKE '%$search%') OR (e.id = j.empr_id AND state LIKE '%$search%') OR (e.id = j.empr_id AND companyName LIKE '%$search%')";
+          $query = "SELECT e.*, j.*, TIMESTAMPDIFF(SECOND, date_posted, NOW()) as diff FROM employer_tbl e, job_tbl j WHERE e.id = j.empr_id AND title LIKE '%$search%' OR (e.id = j.empr_id AND street LIKE '%$search%') OR (e.id = j.empr_id AND barangay LIKE '%$search%') OR (e.id = j.empr_id AND city LIKE '%$search%') OR (e.id = j.empr_id AND state LIKE '%$search%') OR (e.id = j.empr_id AND companyName LIKE '%$search%')";
           $result = mysqli_query($con, $query);
           $queryResult = mysqli_num_rows($result);
-        ?>
+          
+              ?>
           <span style="text-transform: uppercase;">Search Result for "<?php echo $search; ?>"</span>
           <p style="color: #000;"><?php echo $queryResult ?> result/s found</p>
           <?php
-          if ($queryResult > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-              $image = $row['image'];
-          ?>
-              <div class="col-lg-3 col-md-6 col-sm-12">
-                <form action="job_details.php?<?php echo $row['job_id']; ?>" method="get">
-                  <input type="hidden" value="<?php echo $row['job_id']; ?>" name="job_id">
-                  <div class="card" style="width: 100%; height: 400px;">
-                    <button type="submit" name="view" style="background: inherit; border: none;">
-                      <div class="card-body" style="background: none !important;">
-                        <img width="30%" alt="Company Logo" style="box-sizing: border-box;" <?php echo '<img src="../imageStorage/' . $image . '" />'; ?> <br><br>
-                        <p class="card-title" style="text-align: left !important;"><?php echo $row['title']; ?></p>
-                        <p> <?php echo $row['companyName']; ?> <br> <strong><?php echo $row['city'], ", ", $row['state']; ?></strong></p>
-                        <p><strong><?php echo $row['salary']; ?></strong></p>
-                        <p>Posted on <?php echo $row['formatted_date'];?></p>
-                      </div>
-                    </button>
-                  </div>
+         if (mysqli_num_rows($result)) {
+          while ($row = mysqli_fetch_assoc($result)) {
+            $image = $row['companyLogo'];
+            $diff = $row['diff'];
+            if ($diff < 60) { 
+              $time_ago = $diff . " seconds ago";
+            } else if ($diff < 3600) {
+              $time_ago = floor($diff / 60) . " minute" . ((floor($diff / 60) > 1) ? "s" : "") . " ago";
+            } else if ($diff < 86400) {
+              $time_ago = floor($diff / 3600) . " hour" . ((floor($diff / 3600) > 1) ? "s" : "") . " ago";
+            } else if ($diff < 604800) {
+              $time_ago = floor($diff / 86400) . " day" . ((floor($diff / 86400) > 1) ? "s" : "") . " ago";
+            } else if ($diff < 2592000) {
+              $time_ago = floor($diff / 604800) . " week" . ((floor($diff / 604800) > 1) ? "s" : "") . " ago";
+            } else if ($diff < 31536000) {
+              $time_ago = floor($diff / 2592000) . " month" . ((floor($diff / 2592000) > 1) ? "s" : "") . " ago";
+            } else {
+              $time_ago = floor($diff / 31536000) . " year" . ((floor($diff / 31536000) > 1) ? "s" : "") . " ago";
+            }
+
+         ?>
+               <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card" style="width: 100%; height: 400px;">
+                  <a href="job_details.php?jobid=<?php echo $row['job_id']; ?>" style="text-decoration: none;">
+                    <div class="card-body" style="background: none !important;">
+                      <img width="30%" alt="Company Logo" style="box-sizing: border-box;" <?php echo '<img src="../imageStorage/' . $image . '" />'; ?> <br><br>
+                      <p class="card-title" style="text-align: left !important;"><?php echo $row['title']; ?></p>
+                      <p> <?php echo $row['companyName']; ?> <br> <strong><?php echo $row['city'], ", ", $row['state']; ?></strong></p>
+                      <p><strong><?php echo $row['salary']; ?></strong></p>
+                      <p>Posted on <?php echo $time_ago; ?></p>
+                    </div>
+                  </a>
+                </div>
                 </form>
               </div>
         <?php

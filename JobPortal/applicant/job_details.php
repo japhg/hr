@@ -1,61 +1,73 @@
  <?php
   include "../database/connection.php";
   include "../body/function.php";
+
+
+  
   session_start();
   $errors = array();
 
- if (isset($_POST['apply'])) {
-   $job_id = $_POST['job_id'];
-   $applicant_id = $_POST['applicant_id'];
+  if (isset($_POST['apply'])) {
+    $job_id = $_POST['job_id'];
+    $applicant_id = $_POST['applicant_id'];
 
-   $file = $_FILES['file'];
-   $filename = $_FILES["file"]["name"];
-   $tempname = $_FILES["file"]["tmp_name"];
-   $folder = "../employer/resumeStorage/" . $filename;
+    $file = $_FILES['file'];
+    $filename = $_FILES["file"]["name"];
+    $tempname = $_FILES["file"]["tmp_name"];
+    $folder = "../employer/resumeStorage/" . $filename;
 
-   $folderDestination = $folder;
+    $folderDestination = $folder;
 
+    // Get the MIME type of the uploaded file
+    $file_type = mime_content_type($tempname);
 
+    // List of allowed MIME types
+    $allowed_types = array('application/pdf');
 
-   // Check if the applicant has already applied to 3 different jobs
-   $query = "SELECT COUNT(DISTINCT j_id) as job_count FROM resume_tbl WHERE a_id = $applicant_id";
-   $result = mysqli_query($con, $query);
-   if (mysqli_num_rows($result) > 0) {
-     $row = mysqli_fetch_assoc($result);
-     if ($row['job_count'] >= 3) {
+    // Check if the MIME type is in the list of allowed types
+    if (!in_array($file_type, $allowed_types)) {
+      $_SESSION['errorMessage'] = "Please upload PDF file only. For more details, please read our FAQs.";
+      header("location: searchjob.php");
+      exit;
+    }
 
-       // Show the error message
-       $_SESSION['errorMessage'] = "You already applied to 3 different jobs.";
-       header("location: searchjob.php");
-       mysqli_close($con);
-       exit;
-     } 
-     else {
+    // Check if the applicant has already applied to 3 different jobs
+    $query = "SELECT COUNT(DISTINCT j_id) as job_count FROM resume_tbl WHERE a_id = $applicant_id";
+    $result = mysqli_query($con, $query);
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+      if ($row['job_count'] >= 3) {
 
-
-       // Resume checking
-       $resume_check = "SELECT * FROM resume_tbl WHERE a_id = '$applicant_id' AND j_id = '$job_id'";
-       $res = mysqli_query($con, $resume_check);
-       if (mysqli_num_rows($res) > 0) {
-         $_SESSION['errorMessage'] = "You are already applied to this Job!";
-         header("location: searchjob.php");
-       } 
-       else if (!empty($filename)) {
-         move_uploaded_file($tempname, $folderDestination);
-         $sql = "INSERT INTO resume_tbl(a_id,j_id,resume_attachment) VALUES('$applicant_id','$job_id','$filename')";
-         $result = mysqli_query($con, $sql);
+        // Show the error message
+        $_SESSION['errorMessage'] = "You already applied to 3 different jobs.";
+        header("location: searchjob.php");
+        mysqli_close($con);
+        exit;
+      } else {
 
 
-         $_SESSION['message'] = "File uploaded successfully";
-         header("location: searchjob.php");
-       } else {
+        // Resume checking
+        $resume_check = "SELECT * FROM resume_tbl WHERE a_id = '$applicant_id' AND j_id = '$job_id'";
+        $res = mysqli_query($con, $resume_check);
+        if (mysqli_num_rows($res) > 0) {
+          $_SESSION['errorMessage'] = "You are already applied to this Job!";
+          header("location: searchjob.php");
+        } else if (!empty($filename)) {
+          
+          move_uploaded_file($tempname, $folderDestination);
+          $sql = "INSERT INTO resume_tbl(a_id,j_id,resume_attachment) VALUES('$applicant_id','$job_id','$filename')";
+          $result = mysqli_query($con, $sql);
 
-         $_SESSION['errorMessage'] = "Failed to upload file";
-       }
-     }
-   }
- }
 
+          $_SESSION['message'] = "File uploaded successfully";
+          header("location: searchjob.php");
+        } else {
+
+          $_SESSION['errorMessage'] = "Failed to upload file";
+        }
+      }
+    }
+  }
 
   if (isset($_SESSION['email'], $_SESSION['password'])) {
   ?>
@@ -235,7 +247,7 @@
                    <div class="col-auto">
                      <input type="hidden" name="job_id" value="<?php echo $id; ?>">
                      <input type="hidden" name="applicant_id" value="<?php echo $row['id']; ?>">
-                     <label for="email" class="form-label" style="color: #000;">Please Upload your Resume</label>
+                     <label for="email" class="form-label" style="color: #000;">Please Upload your Resume(pdf only)</label>
                      <input type="file" class="form-control" name="file" id="file" style="color: #000; box-shadow: none; border-color: #6559ca;" required>
                      <div class="invalid-feedback">
                        Please insert your Resume/CV.

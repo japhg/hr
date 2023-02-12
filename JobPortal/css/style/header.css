@@ -315,7 +315,7 @@
         font-size: 13px;
       }
       #logout{
-        display: flex;
+        display: flex; 
         background: inherit;
       }
       #profile{

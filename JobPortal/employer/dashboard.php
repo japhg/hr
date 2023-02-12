@@ -51,35 +51,67 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <!-- <link rel="stylesheet" href="css/style/search_job.css"> -->
-    <link rel="stylesheet" href="../css/style/dashboard.css">
-    <link rel="stylesheet" href="../css/style/footer.css">
-    <link rel="stylesheet" href="../css/style/loader.css">
+    <link rel="stylesheet" href="../css/style/header.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
 
 
     <title>Dashboard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif !important;
+      }
 
+      html,
+      body {
+        background-image: linear-gradient(to right, #fff, #fff, #fff);
+        height: 100vh;
+      }
+
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -0.75rem;
+        margin-left: -0.75rem;
+      }
+
+      .card {
+        width: 100% !important;
+        background: #ffff !important;
+        margin-top: 2rem !important;
+        justify-content: left;
+        padding: 1rem;
+        backdrop-filter: blurd(10px) !important;
+        box-shadow: 5px 10px 20px rgba(0, 0, 0, .3) !important;
+      }
+
+      .card-title {
+        font-size: 18px;
+      }
+
+      .card-title span {
+        color: #000;
+      }
+
+      h5 {
+        color: #6559ca !important;
+      }
+
+      .ps-3 h6 {
+        font-size: 30px;
+
+      }
+    </style>
   </head>
 
   <body>
-    <?php include '../body/loader.php'; ?>
-    <header class="top-nav">
-      <div>
-        <img src="../img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
-        <h1 id="logo-title">JOB PORTAL</h1>
-      </div>
-      <input id="menu-toggle" type="checkbox" />
-      <label class='menu-button-container' for="menu-toggle">
-        <div class='menu-button'></div>
-      </label>
-      <ul class="menu position-absolute top-50 start-50 translate-middle">
-        <li><a class="active" href="dashboard.php">DASHBOARD</a></li>
-        <li><a href="manage_jobs.php">MANAGE JOBS</a></li>
-        <li><a href="postJob.php">POST A JOB</a></li>
-        <li><a href="employer_profile.php">PROFILE</a></li>
-        <li><a href="logout.php">LOGOUT</a></li>
-      </ul>
-    </header>
+    <?php
+    include '../body/loader.php';
+    include '../body/employer_header.php'; ?>
+
     <br><br><br><br><br><br><br><br>
     <main>
       <div class="container mt-12">
@@ -134,28 +166,27 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
                   $row = mysqli_num_rows($result);
 
                 ?>
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart"></i>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-cart"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6><?php
+                          echo $row;
+                          ?></h6>
+                    </div>
                   </div>
-                  <div class="ps-3">
-                    <h6><?php 
-                     echo $row;
-                    ?></h6>
-                  </div>
-                </div>
               </div>
-              <?php } ?>
+            <?php } ?>
             </div>
           </div><!-- End Sales Card -->
 
-
+          
 
         </div>
     </main>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+   
     <?php include '../body/footer.php'; ?>
   </body>
 

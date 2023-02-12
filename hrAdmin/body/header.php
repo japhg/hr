@@ -1,14 +1,13 @@
 
-
 <body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
-    <a href="dashboard.php" class="logo d-flex align-items-center">
+    <a href="#" class="logo d-flex align-items-center">
       <img src="assets/img/alegario_logo.png" alt="Alegario Cure Hospital Logo" class="img-responsive">
-      <span class="d-none d-lg-block"><b style="color: #03989e">Alegario Cure</b> <b style="color: #66CC33">Hospital</b></span>
+      <span class="d-none d-lg-block" style="font-family: 'Poiret One', sans-serif !important;"><b style="color: #03989e">ALEGARIO CURE</b> <b style="color: #66CC33">HOSPITAL</b></span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->
@@ -29,14 +28,14 @@
         </a>
       </li><!-- End Search Icon-->
 
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
 
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
           <span class="badge bg-primary badge-number">4</span>
-        </a><!-- End Notification Icon -->
+        </a> End Notification Icon -->
 
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+        <!-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
             You have 4 new notifications
             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
@@ -100,16 +99,16 @@
             <a href="#">Show all notifications</a>
           </li>
 
-        </ul><!-- End Notification Dropdown Items -->
+        </ul>End Notification Dropdown Items --> 
 
-      </li><!-- End Notification Nav -->
-
+      <!-- </li>End Notification Nav -->
+<!-- 
       <li class="nav-item dropdown">
 
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-chat-left-text"></i>
           <span class="badge bg-success badge-number">3</span>
-        </a><!-- End Messages Icon -->
+        </a> End Messages Icon 
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
           <li class="dropdown-header">
@@ -166,28 +165,37 @@
             <a href="#">Show all messages</a>
           </li>
 
-        </ul><!-- End Messages Dropdown Items -->
+        </ul>
 
-      </li><!-- End Messages Nav -->
+      </li>End Messages Nav -->
 
+
+
+      <?php 
+       $query = "SELECT user.*, admin.*, SUBSTRING(firstname, 1, 1) as first_letter FROM user_table user, admins admin WHERE admin.user_id = user.u_id AND username = '" . $_SESSION['username'] . "'";
+       $result = mysqli_query($con1, $query);
+      if (mysqli_num_rows($result)) {
+        $row = mysqli_fetch_assoc($result);
+        $image = $row['image'];
+        ?>
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-          <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          <img alt="Profile Picture" class="img-small-circle" <?php echo '<img src="imageStorage/' . $image . '" />'; ?>
+          <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $row['first_letter']; ?>. <?php echo $row['lastname'];?></span>
         </a><!-- End Profile Iamge Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>Kevin Anderson</h6>
-            <span>Web Designer</span>
+            <h6><?php echo $row['firstname'], " ", $row['lastname'];?></h6>
+            <span><?php echo $row['role'];?></span>
           </li>
           <li>
             <hr class="dropdown-divider">
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+            <a class="dropdown-item d-flex align-items-center" href="user/profile.php">
               <i class="bi bi-person"></i>
               <span>My Profile</span>
             </a>
@@ -197,7 +205,7 @@
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+            <a class="dropdown-item d-flex align-items-center" href="user/profile.php">
               <i class="bi bi-gear"></i>
               <span>Account Settings</span>
             </a>
@@ -217,15 +225,16 @@
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="logout.php">
+            <a class="dropdown-item d-flex align-items-center" href="body/logout.php">
               <i class="bi bi-box-arrow-right"></i>
               <span>Sign Out</span>
             </a>
           </li>
 
         </ul><!-- End Profile Dropdown Items -->
+    
       </li><!-- End Profile Nav -->
-
+      <?php }?>
     </ul>
   </nav><!-- End Icons Navigation -->
 

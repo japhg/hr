@@ -34,7 +34,7 @@ function sendemail_verify($email,$verify_token)
     <h2>You have registered to Job Portal</h2>
     <h5>Please verify your email address to login with the given below link</h5>
     <br><br>
-    <a href='http://localhost/hr/JobPortal/applicant/verify_email_applicant.php?token=$verify_token'>Click here to verify</a>
+    <a href='http://localhost/Alegario%20Cure%20HMS/hr/JobPortal/applicant/verify_email_applicant.php?token=$verify_token'>Click here to verify</a>
     ";
 
     $content = $email_content;

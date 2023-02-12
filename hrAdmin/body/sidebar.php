@@ -5,45 +5,82 @@
 <ul class="sidebar-nav" id="sidebar-nav">
 
   <li class="nav-item">
-    <a class="nav-link " href="dashboard.php" style="color: #57d8cd;">
+    <a class="nav-link active" href="index.php" style="color: #57d8cd;">
       <i class="bi bi-grid"></i>
       <span>HR Analytics</span>
     </a>
   </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="subsystem.php">
-      <i class="bi bi-menu-button-wide"></i><span>Recruitment and Applicant</span>
+    <a class="nav-link collapsed" href="Recruitment and Applicant Management/recruitment.php">
+      <i class="bi bi-person"></i>
+      <span>Recruitment and Applicant Management</span>
     </a>
-  </li><!-- End Components Nav -->
+  </li>
 
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-journal-text"></i><span>Training and Learning</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bi bi-journal-text"></i><span>Learning and Training</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="forms-elements.html">
-          <i class="bi bi-circle"></i><span>Form Elements</span>
+        <a href="Training and Leaning Management/learning.php">
+          <i class="bi bi-circle"></i><span>Learning Management</span>
         </a>
       </li>
       <li>
-        <a href="forms-layouts.html">
-          <i class="bi bi-circle"></i><span>Form Layouts</span>
-        </a>
-      </li>
-      <li>
-        <a href="forms-editors.html">
-          <i class="bi bi-circle"></i><span>Form Editors</span>
-        </a>
-      </li>
-      <li>
-        <a href="forms-validation.html">
-          <i class="bi bi-circle"></i><span>Form Validation</span>
+        <a href="Training and Leaning Management/training.php">
+          <i class="bi bi-circle"></i><span>Training Management</span>
         </a>
       </li>
     </ul>
   </li><!-- End Forms Nav -->
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="user.php">
+      <i class="bi bi-person"></i>
+      <span>New Hired Onboard</span>
+    </a>
+  </li><!-- End new hired Onboard Page Nav -->
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="user.php">
+      <i class="bi bi-person"></i>
+      <span>Performance Management</span>
+    </a>
+  </li><!-- End F.A.Q Page Nav -->
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="user.php">
+      <i class="bi bi-person"></i>
+      <span>Competency Management</span>
+    </a>
+  </li><!-- End F.A.Q Page Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="user.php">
+      <i class="bi bi-person"></i>
+      <span>Succession Planning</span>
+    </a>
+  </li><!-- End F.A.Q Page Nav -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="user.php">
+      <i class="bi bi-person"></i>
+      <span>Social Recognition</span>
+    </a>
+  </li><!-- End F.A.Q Page Nav -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -162,3 +199,18 @@
 </ul>
 
 </aside><!-- End Sidebar-->
+<script>
+  $(document).ready(function() {
+  // Get the current URL
+  var currentUrl = window.location.href;
+
+  // Loop through each link in the dropdown
+  $("#forms-nav a").each(function() {
+    // Check if the link matches the current URL
+    if (currentUrl === this.href) {
+      // Add the active class to the parent li element
+      $(this).parent().addClass("active");
+    }
+  });
+});
+</script>

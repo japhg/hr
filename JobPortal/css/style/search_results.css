@@ -164,50 +164,7 @@ html, body{
 
 /* For Smart Phone View */
 @media screen and (max-width: 768px){
-    .menu-button-container {
-      display: flex;
-    }
-    .menu {
-      position: absolute;
-      top: 0;
-      margin-top: 135px;
-      left: 0;
-      flex-direction: column;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-    }
-    #menu-toggle ~ .menu li {
-      height: 0;
-      margin: 0;
-      padding: 0;
-      border: 0;
-      transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    #menu-toggle:checked ~ .menu li {
-      border: 1px solid #fff;
-      height: 2.5em;
-      padding: 0.5em;
-      transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    .menu > li {
-      display: flex;
-      justify-content: center;
-      margin: 0;
-      padding: 0.5em 0;
-      width: 100%;
-      color: #fff !important;
-      background-color: rgb(42, 42, 42);
-    }
-    .menu > li:not(:last-child) {
-      border-bottom: 1px solid #000;
-    }
-    .menu li a{
-        color: rgb(212, 212, 212) !important;
-    }
-    .menu li a:hover{
-        color: #6559ca !important;
-    }
+   
     #icons{
       display: none;
     }

@@ -24,9 +24,10 @@
     </label>
 
     <ul class="menu">
-      <li><button class="btn"><a class="active" href="../index.php">HOME</a></button></li>
-      <li><button class="btn"><a href="../body/about.php">ABOUT</a></button></li>
-      <li><button class="btn"><a href="../body/contact.php">CONTACT</a></button></li>
+      <li><button class="btn"><a class="active" href="../../../hr/JobPortal/applicant/searchjob.php">HOME</a></button></li>
+      <li><button class="btn"><a href="../../../hr/JobPortal/applicant/about.php">ABOUT</a></button></li>
+      <li><button class="btn"><a href="../../../hr/JobPortal/applicant/contact.php">CONTACT</a></button></li>
+      <li><button class="btn"><a href="status.php">STATUS</a></button></li>
       <li><button class="btn" id="profile"><a href="#">PROFILE</a></button></li>
       <li><button class="btn" id="logout"><a href="../body/logout.php">LOGOUT</a></button></li>
     </ul>

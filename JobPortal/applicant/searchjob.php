@@ -31,14 +31,14 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600&family=Bebas+Neue&family=Comfortaa:wght@500&family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Hind&family=Inter:wght@300;400;600;800&family=Poiret+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:wght@500;600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -106,11 +106,11 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
           <div class="search-form">
             <form action="searchresults.php" method="get" class="row" id="search-form">
               <div class="col-xl-8 col-lg-8 col-md-8">
-                <span class="material-symbols-sharp" style="position: absolute; left: 2rem; padding-top: 1rem;">search</span>
-                <input type="search" name="search" id="search" class="form-control" placeholder="Job Title, City or Company" style="box-shadow: none;" required>
+              <i class="bi bi-search" style="position: absolute; left: 2rem; padding-top: 1rem;"></i>
+                <input type="search" name="search" id="search" class="form-control" placeholder="Search" style="font-family: 'Roboto', sans-serif; box-shadow: none;" required>
               </div>
               <div class="col-xl-4 col-lg-4 col-md-4">
-                <button type="submit" class="btn" name="searchbtn" id="searchbtn">Search</button>
+                <button type="submit" class="btn" name="searchbtn" id="searchbtn"><i class="bi bi-search"></i></button>
               </div>
             </form>
           </div>

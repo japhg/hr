@@ -1,6 +1,6 @@
 <?php
-include 'connection.php';
-include 'function.php';
+include '../database/connection.php';
+include '../body/function.php';
 session_start();
 $errors = array();
 
@@ -43,7 +43,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <meta http-equiv="refresh" content="15; url=login_employer.php"> -->
-        <link rel="shortcut icon" href="img/hrlogo.png" type="image/x-icon">
+        <link rel="shortcut icon" href="../img/hrlogo.png" type="image/x-icon">
 
         <!-- Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -60,14 +60,14 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Inter:wght@300;400;600;800&family=Poiret+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:wght@500;600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-        <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-        <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-        <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+        <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+        <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+        <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
         <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
 
 
@@ -84,10 +84,10 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 
 
-        <link rel="stylesheet" href="css/style/manage_job.css">
-        <link rel="stylesheet" href="css/style/footer.css">
-        <link rel="stylesheet" href="css/style/loader.css">
-        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="../css/style/manage_job.css">
+        <link rel="stylesheet" href="../css/style/footer.css">
+        <link rel="stylesheet" href="../css/style/loader.css">
+        <link rel="stylesheet" href="../css/bootstrap.css">
 
 
         <title>Update Jobs</title>
@@ -95,13 +95,13 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
     </head>
 
     <body>
-        <?php include 'loader.php'; ?>
+        <?php include '../body/loader.php'; ?>
 
 
         <header class="top-nav">
 
             <div>
-                <img src="img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
+                <img src="../img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
                 <h1 id="logo-title">JOB PORTAL</h1>
             </div>
             <input id="menu-toggle" type="checkbox" />
@@ -232,18 +232,18 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
         </main>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
           <!-- Vendor JS Files -->
-   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.min.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.min.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+   <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/chart.js/chart.min.js"></script>
+    <script src="../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../assets/vendor/quill/quill.min.js"></script>
+    <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
   
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-        <?php include 'footer.php'; ?>
+    <script src="../assets/js/main.js"></script>
+        <?php include '../body/footer.php'; ?>
     </body>
 
     </html>

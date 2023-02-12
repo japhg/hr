@@ -41,7 +41,7 @@
 
     <script>
       $(window).on('load',function(){
-        $(".loader-position").fadeOut(4000);
+        $(".loader-position").fadeOut(2500);
       });
     </script>
 

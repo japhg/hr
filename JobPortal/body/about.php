@@ -85,20 +85,24 @@
         <div class="faq-home" id="faq">
             <div class="faq-title">
                 <h1>FAQ</h1>
-                <h2>Question 1?</h2><br>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod delectus eum, esse optio quae quas inventore voluptates consequatur animi dolorum explicabo tempora vitae recusandae natus iure? Rem nobis suscipit dicta.</p>
+                <h2>How can I create an account on your website?</h2>
+                <p>To create an account on our website, simply click on the "Sign Up" button on the home page, enter your email address, create a password, and fill out the necessary information. Once completed, click on the "Create Account" button.</p>
 
-                <h2>Question 2?</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod delectus eum, esse optio quae quas inventore voluptates consequatur animi dolorum explicabo tempora vitae recusandae natus iure? Rem nobis suscipit dicta.</p>
+                <h2>How do I change my account information?</h2>
+                <p>To change your account information, log in to your account and click on the "Profile" button. From there, you can edit your personal information and make any necessary changes.</p>
 
-                <h2>Question 3?</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod delectus eum, esse optio quae quas inventore voluptates consequatur animi dolorum explicabo tempora vitae recusandae natus iure? Rem nobis suscipit dicta.</p>
+                <h2>How do I search for job postings on your website?</h2>
+                <p>To search for job postings on our website, simply use the search bar on the home page to enter keywords related to the job you're looking for, or browse through the different categories and locations to find the right job for you.</p>
+            
+                <h2>What should I do if I forgot my password?</h2>
+                <p>If you have forgotten your password, simply click on the "Forgot Password" link on the login page, enter your email address, and follow the instructions provided to reset your password.</p>
+              
+                <h2>What type of file format should I use for submitting my resume?</h2><br>
+                <p>For the best and most compatible experience, we recommend that you submit your resume in PDF format. This will ensure that the formatting and layout of your resume is preserved and easily viewable for our hiring team. Please make sure to convert your resume to PDF before submitting it to our job portal.</p>
 
-                <h2>Question 4?</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod delectus eum, esse optio quae quas inventore voluptates consequatur animi dolorum explicabo tempora vitae recusandae natus iure? Rem nobis suscipit dicta.</p>
+                <h2>What should I do if I don't have a PDF version of my resume?</h2>
+                <p>You can easily convert your resume to a PDF format using online conversion tools or using a PDF printer. Simply upload your resume to the online converter or print it using the PDF printer option and save the output as a PDF file.</p>
 
-                <h2>Question 5?</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod delectus eum, esse optio quae quas inventore voluptates consequatur animi dolorum explicabo tempora vitae recusandae natus iure? Rem nobis suscipit dicta.</p>
             </div>
 
         </div>

@@ -34,7 +34,7 @@ function sendemail_verify($email,$verify_token)
     <h2>You have registered to Job Portal</h2>
     <h5>Please verify your email address to login with the given below link</h5>
     <br><br>
-    <a href='http://localhost/hr/JobPortal/applicant/verify_email_applicant.php?token=$verify_token'>Click here to verify</a>
+    <a href='http://localhost/Alegario%20Cure%20HMS/hr/JobPortal/applicant/verify_email_applicant.php?token=$verify_token'>Click here to verify</a>
     ";
 
     $content = $email_content;
@@ -325,10 +325,7 @@ if (isset($_POST['register'])) {
                         Please input Zip Code.
                       </div>
                     </div>
-                    <div class="col-md-12 col-lg-12">
-                    <label for="resume" class="form-label">Attach Resume/CV</label>
-                      <input type="file" class="form-control" name="resume" id="resume" placeholder="Ex. 1119" style="background-color: inherit;  box-shadow: none !important; border-color: #000 !important;">
-                    </div>
+                  
 
                     <div class="col-12">
                       <br><br>

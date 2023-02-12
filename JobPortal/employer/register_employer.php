@@ -33,10 +33,10 @@ function sendemail_verify($email,$verify_token)
     <h2>You have registered to Job Portal</h2>
     <h5>Please verify your email address to login with the given below link</h5>
     <br><br>
-    <a href='http://localhost/hr/JobPortal/verify_email.php?token=$verify_token'>Click here to verify</a>
+    <a href='http://localhost/Alegario%20Cure%20HMS/hr/JobPortal/employer/verify_email.php?token=$verify_token'>Click here to verify</a>
     ";
 
-    $content = $email_content;
+    $content = $email_content; 
 
     $mail->MsgHTML($content);
     $mail->Send();
@@ -88,8 +88,8 @@ if (isset($_POST['register'])) {
           if (!empty($email) && !empty($hashedPassword) && !empty($firstname) && !empty($middlename) && !empty($lastname) && !empty($contact) && !empty($companyName) && !empty($street) && !empty($barangay) && !empty($city) && !empty($state) && !empty($description)) {
 
             // Insert the record into the MySQL table
-            $query = "INSERT INTO employer_tbl (email_address, password, firstname, middlename, lastname, contact_number, companyName, street, barangay, city, state, description, verify_token, e_profile)
-            VALUES ('$email', '$hashedPassword', '$firstname', '$middlename', '$lastname', '$contact','$companyName','$street','$barangay','$city','$state','$description','$verify_token','$profile_image')";
+            $query = "INSERT INTO employer_tbl (email_address, password, firstname, middlename, lastname, contact_number, companyName, street, barangay, city, state, description, verify_token, companyLogo, e_profile)
+            VALUES ('$email', '$hashedPassword', '$firstname', '$middlename', '$lastname', '$contact','$companyName','$street','$barangay','$city','$state','$description','$verify_token','$fileName','$profile_image')";
 
             $results = mysqli_query($con, $query);
 
