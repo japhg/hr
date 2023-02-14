@@ -276,7 +276,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
                     <input type="hidden" name="open" class="open" id="opens" value="<?php echo $row['job_id']; ?>">
                     <a href="javascript:void(0)" class="open_btn_ajax btn btn-outline-default">Open</a>
                   <?php } ?>
-                </td>
+                </td> 
           </tr>
       <?php
 

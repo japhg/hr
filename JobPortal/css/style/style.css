@@ -162,9 +162,10 @@ html, body{
   display: flex;
   justify-content: center;
   flex-direction: row;
-  width: 100vw;
+  /* width: 100vw; */
   font-family: 'Poppins', sans-serif;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
+  margin: 2rem 5rem ;
   font-size: 23px;
 } 
 
@@ -198,6 +199,7 @@ html, body{
   font-weight: 700;
   color: #121212 !important;
   background-clip: text !important;
+  text-align: center !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important; 
   /* background-image: linear-gradient(to right, #5a4be2,#b41313) !important; */
@@ -595,6 +597,9 @@ html, body{
   }
   .home-image{
     display: none;
+  }
+  .faq-title h2{
+    text-align: center;
   }
   .description{
     text-align: center;

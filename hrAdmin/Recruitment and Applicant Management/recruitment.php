@@ -1,6 +1,7 @@
 <?php
 session_Start();
 include '../../../../ALEGARIO/Hospital-template/database/connection.php';
+include '../../JobPortal/database/connection.php';
 
 
 if (isset($_SESSION['username'], $_SESSION['password'])) {
@@ -39,15 +40,16 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
     <link rel="stylesheet" href="">
 
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="../../JobPortal/database/connection.php">
 
 
 
@@ -82,11 +84,18 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
             </li>
 
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#applicants">Applicants</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#shortlisting">Shortlisting</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#screening">Screening of Applicants</button>
             </li>
 
             <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#send-email">Send Email Message</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#rejected-applicant">Rejected Applicants</button>
             </li>
 
           </ul>
@@ -111,7 +120,6 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                 </thead>
                 <tbody>
                   <?php
-                  include '../../JobPortal/database/connection.php';
 
                   $query = "SELECT job.*, emp.*, DATE_FORMAT(date_posted, '%M %d, %Y')as formatted_date FROM job_tbl job, employer_tbl emp WHERE emp.id = job.empr_id";
                   $result = mysqli_query($con, $query);
@@ -141,14 +149,15 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
             <!-- View Applicants -->
-            <div class="tab-pane" id="applicants">
+            <div class="tab-pane" id="shortlisting">
               <!-- Button trigger modal -->
 
               <label for="filter-select">Filter by:</label>
               <select id="filter-select" class="form-select" style="box-shadow: none;">
                 <option value="All">All</option>
-                <option value="Shortlisted">Shortlisted</option>
-                <option value="Not Shortlisted">Not Shortlisted</option>
+                <option value="Short listed">Shortlisted</option>
+                <option value="Not-Shortlisted">Not Shortlisted</option>
+
               </select>
               <table class="table table-borderless" id="example1" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
                 <thead>
@@ -169,13 +178,17 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                 </thead>
                 <tbody>
                   <?php
-                  include '../../JobPortal/database/connection.php';
+
 
                   $query = "SELECT job.*, applicant.*, resume.*, DATE_FORMAT(date_uploaded, '%M %d, %Y')as formatted_date FROM job_tbl job, applicant_tbl applicant, resume_tbl resume WHERE applicant.id = resume.a_id AND job.job_id = resume.j_id";
                   $result = mysqli_query($con, $query);
                   if (mysqli_num_rows($result)) {
                     while ($row = mysqli_fetch_assoc($result)) {
                       $resume =  $row['resume_attachment'];
+
+                      if ($row['resume_status'] === "Shortlisting Rejected") {
+                        continue;
+                      }
                   ?>
                       <tr>
                         <td><?php echo $row['id']; ?></td>
@@ -197,7 +210,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                               </div>
                               <div class="modal-body">
                                 <iframe <?php echo 'src="../../JobPortal/employer/resumeStorage/' . $row['resume_attachment'] . '"'; ?> height="1000" width="100%"></iframe>
-                                
+
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -206,24 +219,58 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                           </div>
                         </div>
                         <?php
-                        if($row['resume_status'] === "SHORTLISTED"){
+                        if ($row['resume_status'] === "Shortlisted") {
                         ?>
 
-                        <td><span class="badge bg-success">Shortlisted</span></td>
+                          <td><span class="badge bg-success">Short listed</span></td>
+                          <td><button type="button" name="shortlist" class="btn btn-primary" disabled>Shortlist</button></td>
+                          <td><button type="button" name="reject" class="btn btn-dark" disabled>Reject</button></td>
 
-                        <?php 
-                        }
-                        elseif($row['resume_status'] === "NOT SHORTLISTED"){
+                        <?php
+                        } elseif ($row['resume_status'] === "Not Shortlisted") {
                         ?>
-                        <td><span class="badge bg-danger">Not Shortlisted</span></td>
-                        <?php }?>
-                        <td><button type="button" name="shortlist" class="btn btn-primary">Shortlist</button></td>
-                        <td>Reject</td>
+                          <td><span class="badge bg-secondary">Not-Shortlisted</span></td>
+
+                          <td>
+                            <input type="hidden" name="view" class="view" id="views" value="<?php echo $row['r_id']; ?>">
+                            <a href="javascript:void(0)" class="shortlist_btn_ajax btn btn-primary">Shortlist</a>
+                          </td>
+                          <td>
+                            <input type="hidden" name="rview" class="rview" id="rviews" value="<?php echo $row['r_id']; ?>">
+                            <a href="javascript:void(0)" class="shortlist_reject_btn_ajax btn btn-dark">Reject</a>
+                          </td>
+
+                        <?php } ?>
+
                       </tr>
-                  <?php }
-                  } ?>
+                  <?php
+                    }
+                  }
+                  ?>
                 </tbody>
               </table>
+            </div>
+
+
+
+
+            <!-- Screening -->
+            <div class="tab-pane" id="screening">
+              <table class="table table-borderless" id="example2" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Applicant Name</th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+              </table>
+
             </div>
 
 
@@ -233,6 +280,45 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
             </div>
+
+            <!-- Send Email -->
+            <div class="tab-pane" id="rejected-applicant">
+              <table class="table table-borderless" id="example3">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email Address</th>
+                    <th>Phone Number</th>
+                    <th>Resume Attachment</th>
+                    <th>Rejection Status</th>
+                    <th>Rejection Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $query = "SELECT resume.*, reject.*, DATE_FORMAT(rejection_date, '%M %d, %Y')as formatted_date FROM resume_tbl resume, rejected_applicant reject WHERE resume.r_id = reject.resume_id";
+                  $result = mysqli_query($con, $query);
+                  if (mysqli_num_rows($result)) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                  ?>
+                      <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['firstname']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
+                        <td><?php echo $row['phone']; ?></td>
+                        <td><?php echo $row['resume_attachment']; ?></td>
+                        <td><?php echo $row['status']; ?></td>
+                        <td><?php echo $row['formatted_date']; ?></td>
+                      </tr>
+                  <?php }
+                  }
+                  ?>
+                </tbody>
+              </table>
+
+            </div>
+
           </div>
 
 
@@ -247,29 +333,11 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
     </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script>
       // Posted job table
       $(document).ready(function() {
         $('#example').DataTable();
       });
-
 
       // Applicant table
       $(document).ready(function() {
@@ -277,30 +345,106 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
         $('#filter-select').on('change', function() {
           var selectedOption = $(this).val();
-          if (selectedOption === 'Shortlisted') {
-            table.search('Shortlisted').draw();
-          } else if (selectedOption === 'Not Shortlisted') {
-            table.search('Not Shortlisted').draw();
+          if (selectedOption === 'Short listed') {
+            table.search('Short listed', true, false, true).draw();
+          } else if (selectedOption === 'Not-Shortlisted') {
+            table.search('Not-Shortlisted', true, false, true).draw();
+          } else if (selectedOption === 'Rejected') {
+            table.search('Rejected', true, false, true).draw();
           } else {
             table.search('').draw();
           }
         });
       });
+
+       // Rejected Applicant Table
+       $(document).ready(function() {
+        $('#example3').DataTable();
+      });
+
     </script>
 
+    <script>
+      // For Applicant Shortlist
+      $(document).ready(function() {
+        $('.shortlist_btn_ajax').click(function(e) {
+          e.preventDefault();
 
+          var closeid = $(this).closest("tr").find('.view').val();
 
+          swal({
+              title: "Are you sure you want to shortlist this?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
 
+                $.ajax({
+                  type: "POST",
+                  url: "actions.php",
+                  data: {
+                    "shortlist_btn_set": 1,
+                    "shortlist_id": closeid,
+                  },
+                  success: function(response) {
 
+                    swal("Successfully shortlisted!", {
+                      icon: "success",
+                    }).then((result) => {
+                      location.reload();
+                    });
 
+                  }
+                });
 
+              }
+            });
 
+        });
+      });
 
+      // For Applicant Shortlist Rejection
+      $(document).ready(function() {
+        $('.shortlist_reject_btn_ajax').click(function(e) {
+          e.preventDefault();
 
+          var shortlistRejectid = $(this).closest("tr").find('.rview').val();
 
+          swal({
+              title: "Are you sure you want to Reject this?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
 
+                $.ajax({
+                  type: "POST",
+                  url: "actions.php",
+                  data: {
+                    "shortlist_reject_btn_set": 1,
+                    "shortlist_reject_id": shortlistRejectid,
+                  },
+                  success: function(response) {
 
+                    swal("Successfully Rejected!", {
+                      icon: "success",
+                    }).then((result) => {
+                      location.reload();
+                    });
 
+                  }
+                });
+
+              }
+            });
+
+        });
+      });
+    </script>
 
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>

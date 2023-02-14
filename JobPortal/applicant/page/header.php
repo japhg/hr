@@ -24,7 +24,7 @@
     </label>
 
     <ul class="menu">
-      <li><button class="btn"><a class="active" href="../../../hr/JobPortal/applicant/searchjob.php">HOME</a></button></li>
+      <li><button class="btn"><a href="../../../hr/JobPortal/applicant/searchjob.php">HOME</a></button></li>
       <li><button class="btn"><a href="../../../hr/JobPortal/applicant/about.php">ABOUT</a></button></li>
       <li><button class="btn"><a href="../../../hr/JobPortal/applicant/contact.php">CONTACT</a></button></li>
       <li><button class="btn"><a href="status.php">STATUS</a></button></li>

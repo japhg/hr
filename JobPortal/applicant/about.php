@@ -186,7 +186,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 </body>
 
 </html>
-<?php
+<?php 
 } else {
   header("location:../applicant/login_applicant.php");
   session_destroy();

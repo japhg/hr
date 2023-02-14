@@ -3,7 +3,7 @@
   include "../body/function.php";
 
 
-  
+
   session_start();
   $errors = array();
 
@@ -24,22 +24,55 @@
     // List of allowed MIME types
     $allowed_types = array('application/pdf');
 
+
+
+    // Check if the applicant has been rejected for the same job before
+    $check_query = "SELECT job.*, applicant.*, resume.*, rejected.* 
+    FROM job_tbl job, applicant_tbl applicant, resume_tbl resume, rejected_applicant rejected 
+    WHERE job.job_id = resume.j_id 
+    AND applicant.id = resume.a_id
+    AND resume.r_id = rejected.resume_id 
+    AND job.job_id = '$job_id' 
+    AND rejected.email = '".$_SESSION['email']."'";
+    
+    $check_result = mysqli_query($con, $check_query);
+
+    if (mysqli_num_rows($check_result) > 0) {
+
+      // get the date when the applicant was rejected
+      $row = mysqli_fetch_assoc($check_result);
+      $rejected_date = $row['rejection_date'];
+
+      // calculate the time difference between the current date and the rejected date
+      $time_diff = time() - strtotime($rejected_date);
+      $months_diff = floor($time_diff / (30 * 24 * 60 * 60));
+
+      // check if the applicant is eligible to apply again
+      if ($months_diff < 6) {
+        $_SESSION['errorMessage'] = "You are rejected to this job. You can re-apply again after 6 months";
+        header("location: searchjob.php");
+        exit;
+      }
+    }
+
     // Check if the MIME type is in the list of allowed types
-    if (!in_array($file_type, $allowed_types)) {
+    else if (!in_array($file_type, $allowed_types)) {
       $_SESSION['errorMessage'] = "Please upload PDF file only. For more details, please read our FAQs.";
       header("location: searchjob.php");
       exit;
     }
 
-    // Check if the applicant has already applied to 3 different jobs
-    $query = "SELECT COUNT(DISTINCT j_id) as job_count FROM resume_tbl WHERE a_id = $applicant_id";
+    $today = date("Y-m-d");
+
+    // Check if the applicant has already applied to 3 different jobs today
+    $query = "SELECT COUNT(DISTINCT j_id) as job_count FROM resume_tbl WHERE a_id = $applicant_id AND DATE(date_uploaded) = '$today'";
     $result = mysqli_query($con, $query);
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_assoc($result);
       if ($row['job_count'] >= 3) {
 
         // Show the error message
-        $_SESSION['errorMessage'] = "You already applied to 3 different jobs.";
+        $_SESSION['errorMessage'] = "You already applied to 3 different jobs today.";
         header("location: searchjob.php");
         mysqli_close($con);
         exit;
@@ -53,7 +86,7 @@
           $_SESSION['errorMessage'] = "You are already applied to this Job!";
           header("location: searchjob.php");
         } else if (!empty($filename)) {
-          
+
           move_uploaded_file($tempname, $folderDestination);
           $sql = "INSERT INTO resume_tbl(a_id,j_id,resume_attachment) VALUES('$applicant_id','$job_id','$filename')";
           $result = mysqli_query($con, $sql);
