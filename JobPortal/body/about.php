@@ -26,7 +26,6 @@
 
     <!-- Script -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -85,28 +84,73 @@
         <div class="faq-home" id="faq">
             <div class="faq-title">
                 <h1>FAQ</h1>
-                <h2>How can I create an account on your website?</h2>
-                <p>To create an account on our website, simply click on the "Sign Up" button on the home page, enter your email address, create a password, and fill out the necessary information. Once completed, click on the "Create Account" button.</p>
-
-                <h2>How do I change my account information?</h2>
-                <p>To change your account information, log in to your account and click on the "Profile" button. From there, you can edit your personal information and make any necessary changes.</p>
-
-                <h2>How do I search for job postings on your website?</h2>
-                <p>To search for job postings on our website, simply use the search bar on the home page to enter keywords related to the job you're looking for, or browse through the different categories and locations to find the right job for you.</p>
-            
-                <h2>What should I do if I forgot my password?</h2>
-                <p>If you have forgotten your password, simply click on the "Forgot Password" link on the login page, enter your email address, and follow the instructions provided to reset your password.</p>
-              
-                <h2>What type of file format should I use for submitting my resume?</h2><br>
-                <p>For the best and most compatible experience, we recommend that you submit your resume in PDF format. This will ensure that the formatting and layout of your resume is preserved and easily viewable for our hiring team. Please make sure to convert your resume to PDF before submitting it to our job portal.</p>
-
-                <h2>What should I do if I don't have a PDF version of my resume?</h2>
-                <p>You can easily convert your resume to a PDF format using online conversion tools or using a PDF printer. Simply upload your resume to the online converter or print it using the PDF printer option and save the output as a PDF file.</p>
+                <div class="accordion accordion-flush" id="accordionFlushExample" style="width: 100%">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="box-shadow: none;">
+                                How can I create an account on your website?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">To create an account on our website, simply click on the "Sign Up" button on the home page, enter your email address, create a password, and fill out the necessary information. Once completed, click on the "Create Account" button.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" style="box-shadow: none;">
+                                How do I change my account information?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">To change your account information, log in to your account and click on the "Profile" button. From there, you can edit your personal information and make any necessary changes.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree" style="box-shadow: none;">
+                                How do I search for job postings on your website?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample" style="box-shadow: none;">
+                            <div class="accordion-body">To search for job postings on our website, simply use the search bar on the home page to enter keywords related to the job you're looking for, or browse through the different categories and locations to find the right job for you.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree" style="box-shadow: none;">
+                                What should I do if I forgot my password?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample" style="box-shadow: none;">
+                            <div class="accordion-body">If you have forgotten your password, simply click on the "Forgot Password" link on the login page, enter your email address, and follow the instructions provided to reset your password.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseThree" style="box-shadow: none;">
+                                What type of file format should I use for submitting my resume?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample" style="box-shadow: none;">
+                            <div class="accordion-body">For the best and most compatible experience, we recommend that you submit your resume in PDF format. This will ensure that the formatting and layout of your resume is preserved and easily viewable for our hiring team. Please make sure to convert your resume to PDF before submitting it to our job portal.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseThree" style="box-shadow: none;">
+                                What should I do if I don't have a PDF version of my resume?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample" style="box-shadow: none;">
+                            <div class="accordion-body">You can easily convert your resume to a PDF format using online conversion tools or using a PDF printer. Simply upload your resume to the online converter or print it using the PDF printer option and save the output as a PDF file.</div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
         </div>
-<br><br><br><br><br>
+        <br><br><br><br><br>
         <div class="tc-home" id="tc">
             <div class="tc-title">
                 <h1>Terms & Conditions</h1>

@@ -11,7 +11,7 @@ if (isset($_POST['apply'])) {
   }
   else {
     header("location: ../applicant/JobApply_Login.php?job_id=$job_id");
-    $_SESSION['werror'] = "It seems that you are not already login. You must login first before applying to the job!";
+    $_SESSION['werror'] = "It seems that you are not already login. You must log in first before applying for the job!";
   }
 } 
 

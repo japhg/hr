@@ -25,12 +25,12 @@
     </a>
     <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="Training and Leaning Management/learning.php">
+        <a href="../Training and Leaning Management/learning.php">
           <i class="bi bi-circle"></i><span>Learning Management</span>
         </a>
       </li>
       <li>
-        <a href="Training and Leaning Management/training.php">
+        <a href="../Training and Leaning Management/training.php">
           <i class="bi bi-circle"></i><span>Training Management</span>
         </a>
       </li>

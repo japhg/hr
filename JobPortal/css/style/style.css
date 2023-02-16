@@ -158,22 +158,31 @@ html, body{
   background-image: linear-gradient(to right, #5346cc,#550044) !important;
 }
 
-.faq-title h2{
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  /* width: 100vw; */
-  font-family: 'Poppins', sans-serif;
-  /* margin-top: 2rem; */
-  margin: 2rem 5rem ;
-  font-size: 23px;
-} 
+.faq-title .accordion{
+  width: 100%;
+}
 
-.faq-title p{
-  font-size: 15px;
-  margin: 0 12rem;
+.faq-title .accordion-item{
+  margin: 2rem 20rem;
+  width: 100%;
+}
+
+.faq-title .accordion-button{
   font-family: 'Roboto', sans-serif;
-  text-align: center;
+  font-size: 22px;
+  padding-right: 1rem;
+  font-weight: 500;
+  width: 70vw !important; 
+}
+
+.faq-title .accordion-button:hover{
+  text-decoration: underline;
+}
+
+.faq-title .accordion-body{
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  width: 70vw !important; 
 }
 
 .tc-home{
@@ -475,7 +484,7 @@ html, body{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: #121212;
+  background: #000000;
 }
 
 .footer-body .row{
@@ -506,19 +515,23 @@ html, body{
 #footer_links ul li{
   list-style: none;
   text-align: center;
-  color: #FFFFFF61 !important;
+  color: #FFF !important;
   font-family: 'Cera-Light', sans-serif !important;
 }
 
 #footer_links ul span{
-  font-size: 22px;
-  color: #fff !important;
+  font-size: 20px;
+  color: #FFFFFF61 !important;
   font-family: 'Poppins', sans-serif !important;
+  font-weight: 400;
 }
 
 #footer_links ul li a{
-  color: #FFFFFF61 !important;
-  font-family: 'Cera-Light', sans-serif !important;
+  color: #fff !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 400  ;
+  padding-top: 1rem;
+  text-align: start;
 }
 
 #footer_links ul li a:hover{

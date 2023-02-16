@@ -186,7 +186,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 
 
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <?php include '../body/footer.php'; ?>
 
 

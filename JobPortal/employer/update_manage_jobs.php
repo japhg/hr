@@ -83,40 +83,26 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 
 
-
-        <link rel="stylesheet" href="../css/style/manage_job.css">
-        <link rel="stylesheet" href="../css/style/footer.css">
-        <link rel="stylesheet" href="../css/style/loader.css">
+        <link rel="stylesheet" href="../css/style/header.css">
         <link rel="stylesheet" href="../css/bootstrap.css">
 
 
         <title>Update Jobs</title>
-
+<style>
+    *{
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
     </head>
 
     <body>
-        <?php include '../body/loader.php'; ?>
+        <?php 
+        include '../body/loader.php';
+        include '../body/employer_header.php';
+        ?>
 
 
-        <header class="top-nav">
-
-            <div>
-                <img src="../img/hrlogo.png" alt="HR Logo" class="rounded" id="logo">
-                <h1 id="logo-title">JOB PORTAL</h1>
-            </div>
-            <input id="menu-toggle" type="checkbox" />
-            <label class='menu-button-container' for="menu-toggle">
-                <div class='menu-button'></div>
-            </label>
-            <ul class="menu position-absolute top-50 start-50 translate-middle">
-                <li><a href="dashboard.php">DASHBOARD</a></li>
-                <li><a class="active" href="manage_jobs.php">MANAGE JOBS</a></li>
-                <li><a href="postJob.php">POST A JOB</a></li>
-                <li><a href="employer_profile.php">PROFILE</a></li>
-                <li><a href="logout.php">LOGOUT</a></li>
-            </ul>
-
-        </header>
+       
         <br><br><br><br><br><br><br><br>
         <main>
             <?php

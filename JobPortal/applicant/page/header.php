@@ -28,6 +28,7 @@
       <li><button class="btn"><a href="../../../hr/JobPortal/applicant/about.php">ABOUT</a></button></li>
       <li><button class="btn"><a href="../../../hr/JobPortal/applicant/contact.php">CONTACT</a></button></li>
       <li><button class="btn"><a href="status.php">STATUS</a></button></li>
+      <li><button class="btn"><a href="exam.php">EXAM</a></button></li>
       <li><button class="btn" id="profile"><a href="#">PROFILE</a></button></li>
       <li><button class="btn" id="logout"><a href="../body/logout.php">LOGOUT</a></button></li>
     </ul>

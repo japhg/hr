@@ -103,7 +103,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
           <!-- View Posted Jobs -->
           <div class="tab-content pt-2">
             <div class="tab-pane fade show active profile-overview" id="posted-jobs">
-              <table class="table table-striped table-hover" id="example" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
+              <table class="table table-secondary table-striped table-hover" id="example" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
                 <thead>
                   <tr>
                     <th>Job ID</th>
@@ -159,7 +159,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                 <option value="Not-Shortlisted">Not Shortlisted</option>
 
               </select>
-              <table class="table table-borderless" id="example1" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
+              <table class="table table-secondary table-borderless" id="example1" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
                 <thead>
                   <tr>
                     <th>Applicant ID</th>
@@ -186,7 +186,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                     while ($row = mysqli_fetch_assoc($result)) {
                       $resume =  $row['resume_attachment'];
 
-                      if ($row['resume_status'] === "Shortlisting Rejected") {
+                      if ($row['resume_status'] === "Shortlisting Rejected" || $row['resume_status'] !== "Shortlisted" && $row['resume_status'] !== "Not Shortlisted") {
                         continue;
                       }
                   ?>
@@ -277,13 +277,13 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
             <!-- Send Email -->
             <div class="tab-pane" id="send-email">
 
-
+                  
 
             </div>
 
             <!-- Send Email -->
             <div class="tab-pane" id="rejected-applicant">
-              <table class="table table-borderless" id="example3">
+              <table class="table table-secondary table-borderless" id="example3">
                 <thead>
                   <tr>
                     <th>#</th>
