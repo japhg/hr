@@ -38,6 +38,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -99,8 +100,8 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
           <!-- View Posted Jobs -->
           <div class="tab-content pt-2">
             <div class="tab-pane fade show active profile-overview" id="posted-jobs">
-              <table class="table table-secondary table-striped table-hover" id="example" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
-                <thead>
+              <table class="table table-sm table-hover" id="example" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
+                <thead class="bg-dark text-white">
                   <tr>
                     <th>Job ID</th>
                     <th>Job Title</th>
@@ -110,7 +111,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                     <th>Company Name</th>
                     <th>Date Posted</th>
                     <th>Actions</th>
-                    
+
 
                   </tr>
                 </thead>
@@ -129,11 +130,11 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                         <td><?php echo $row['status']; ?></td>
                         <td><?php echo $row['firstname'], " ", $row['lastname']; ?></td>
                         <td><?php echo $row['companyName']; ?></td>
-                        <td><?php echo $row['formatted_date'];?></td>
+                        <td><?php echo $row['formatted_date']; ?></td>
                         <td>
                           <button type="button" class="btn btn-primary addExamBtn">Add Exam</button>
                         </td>
-                       
+
                       </tr>
                   <?php }
                   } ?>
@@ -146,8 +147,8 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
               <!-- Table for Questions -->
-              <table class="table table-striped table-secondary table-hover" id="example01" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
-                <thead>
+              <table class="table table-sm table-hover" id="example01" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
+                <thead class="bg-dark text-white">
                   <tr>
                     <th>Job ID</th>
                     <th>Job Title</th>
@@ -178,33 +179,33 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                         <td><?php echo $row['title']; ?></td>
                         <td><?php echo $row['exam_title']; ?></td>
                         <td><?php echo $row['formatted_date']; ?></td>
-                        <?php 
-                        if($row['exam_duration'] === "5"){
+                        <?php
+                        if ($row['exam_duration'] === "5") {
                           echo "<td>5 Minutes</td>";
-                        } elseif($row['exam_duration'] === "10"){
+                        } elseif ($row['exam_duration'] === "10") {
                           echo "<td>10 Minutes</td>";
-                        } elseif($row['exam_duration'] === "30"){
+                        } elseif ($row['exam_duration'] === "30") {
                           echo "<td>30 Minutes</td>";
-                        } elseif($row['exam_duration'] === "60"){
+                        } elseif ($row['exam_duration'] === "60") {
                           echo "<td>1 Hour</td>";
-                        } elseif($row['exam_duration'] === "120"){
+                        } elseif ($row['exam_duration'] === "120") {
                           echo "<td>2 Hours</td>";
                         }
                         ?>
-                        
-                        <td>+<?php echo $row['mark_per_right_answer'];?> points</td>
+
+                        <td>+<?php echo $row['mark_per_right_answer']; ?> points</td>
                         <td>-<?php echo $row['mark_per_right_answer']; ?> points</td>
                         <?php
-                        if($row['exam_status'] === "Pending"){
+                        if ($row['exam_status'] === "Pending") {
                           echo '<td><span class="badge bg-warning" style="color: black;">Pending</span></td>';
-                          echo '<td><button class="btn btn-primary addQuestionBtn">Add Questions</button></td>';
-                        } elseif($row['exam_status'] === "Completed"){
+                          echo '<td><button class="btn btn-primary btn-sm addQuestionBtn">Add Questions</button></td>';
+                        } elseif ($row['exam_status'] === "Completed") {
                           echo '<td><span class="badge bg-dark">Completed</span></td>';
-                          echo '<td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">View Questions</button></td>';
+                          echo '<td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">View Questions</button></td>';
                         }
                         ?>
-                        
-                        <td><button class="btn btn-info updateExamBtn">Update</button></td>
+
+                        <td><button class="btn btn-info text-white updateExamBtn">Update</button></td>
                         <td>
                           <input type="hidden" name="deleteExam" class="deleteExam" id="deleteExam" value="<?php echo $row['id']; ?>">
                           <a href="javascript:void(0)" class="deleteExamBtn btn btn-danger">Delete</a>
@@ -214,7 +215,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                   } ?>
                 </tbody>
 
-<!-- Add Exam Modal Form ###################################################################################################################################################### -->
+                <!-- Add Exam Modal Form ###################################################################################################################################################### -->
                 <div class="modal fade" id="addExamBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -261,7 +262,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                             </div>
                             <div class="col-auto py-3">
                               <label for="mark_per_right" class="form-label" style="color: #000;">Mark per right answer</label>
-                              <select class="form-select" name="mark_per_right" id="mark_per_right" required> 
+                              <select class="form-select" name="mark_per_right" id="mark_per_right" required>
                                 <option value="" disabled selected></option>
                                 <option value="1">+1 point</option>
                                 <option value="2">+2 points</option>
@@ -299,8 +300,8 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                 </div>
 
 
-<!-- Update Exam Modal Form ###################################################################################################################################################### -->
-<div class="modal fade" id="updateExamBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Update Exam Modal Form ###################################################################################################################################################### -->
+                <div class="modal fade" id="updateExamBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -385,7 +386,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
 
-<!-- Add Questions Modal Form ################################################################################################################################################# -->
+                <!-- Add Questions Modal Form ################################################################################################################################################# -->
                 <div class="modal fade" id="addQuestionBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -394,14 +395,14 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                      <?php
+                        <?php
                         $query = "SELECT * FROM exam_tbl";
                         $result = mysqli_query($con, $query);
                         if (mysqli_num_rows($result)) {
                           $row = mysqli_fetch_assoc($result);
                         ?>
-                      <form action="action.php" method="post" class="form-group needs-validation" novalidate>
-                        <input type="hidden" name="examID" id="examID" value="<?php echo $row['id'];?>">
+                          <form action="action.php" method="post" class="form-group needs-validation" novalidate>
+                            <input type="hidden" name="examID" id="examID" value="<?php echo $row['id']; ?>">
                             <div class="col-auto">
                               <label for="questionTitle" class="form-label" style="color: #000;">Question Title</label>
                               <input type="text" class="form-control" name="questionTitle" id="questionTitle" style="box-shadow: none;" required>
@@ -441,14 +442,18 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                               <label for="answer" class="form-label" style="color: #000;">Correct Answer</label>
                               <select name="answer" id="answer" class="form-select" required>
                                 <option value="" disabled selected>Select Answer</option>
-                              <option value="0">Option 1</option>
-                              <option value="1">Option 2</option>
-                              <option value="2">Option 3</option>
-                              <option value="3">Option 4</option>
+                                <option value="0">Option 1</option>
+                                <option value="1">Option 2</option>
+                                <option value="2">Option 3</option>
+                                <option value="3">Option 4</option>
                               </select>
                               <div class="invalid-feedback">
                                 This field is required.
                               </div>
+                            </div>
+                            <br>
+                            <div class="col-auto">
+                              <button type="button" class="btn btn-primary" id="add-question">Add +</button>
                             </div>
                       </div>
                       <div class="modal-footer">
@@ -456,7 +461,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                         <button type="submit" name="add_questions" class="btn btn-primary">Add Questions</button>
                       </div>
                       </form>
-                      <?php }?>
+                    <?php } ?>
                     </div>
                   </div>
                 </div>
@@ -480,8 +485,8 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                 <option value="Not-Shortlisted">Not Shortlisted</option>
 
               </select>
-              <table class="table table-borderless table-striped table-hover" id="example1" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
-                <thead>
+              <table class="table table-borderless table-hover" id="example1" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
+                <thead class="bg-dark text-white">
                   <tr>
                     <th>Applicant ID</th>
                     <th>Applicant Name</th>
@@ -573,8 +578,8 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
             <!-- Screening -->
             <div class="tab-pane" id="exam-list">
-              <table class="table table-borderless table-striped table-hover" id="example2" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
-                <thead>
+              <table class="table table-borderless table-hover" id="example2" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
+                <thead class="bg-dark text-white">
                   <tr>
                     <th>ID</th>
                     <th>Exam Title</th>
@@ -611,7 +616,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
     </main>
-<!-- // DataTable Script -->
+    <!-- // DataTable Script -->
     <script>
       // Posted job table
       $(document).ready(function() {
@@ -744,14 +749,14 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
           $tr = $(this).closest('tr');
 
-          var data = $tr.children("td").map(function(){
+          var data = $tr.children("td").map(function() {
             return $(this).text();
           }).get();
 
           console.log(data);
 
           $('#job_id').val(data[0]);
-          
+
 
         });
       });
@@ -759,14 +764,13 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
     <!-- // Update Exams -->
     <script>
-
       $(document).ready(function() {
         $('.updateExamBtn').on('click', function() {
           $('#updateExamBtn').modal('show');
 
           $tr = $(this).closest('tr');
 
-          var data = $tr.children("td").map(function(){
+          var data = $tr.children("td").map(function() {
             return $(this).text();
           }).get();
 
@@ -776,7 +780,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
         });
       });
     </script>
-  
+
     <!-- // Delete Exams -->
     <script>
       $(document).ready(function() {
@@ -819,22 +823,22 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
       });
     </script>
 
-<!-- // Add Questions -->
-<script>
+    <!-- // Add Questions -->
+    <script>
       $(document).ready(function() {
         $('.addQuestionBtn').on('click', function() {
           $('#addQuestionBtn').modal('show');
 
           $tr = $(this).closest('tr');
 
-          var data = $tr.children("td").map(function(){
+          var data = $tr.children("td").map(function() {
             return $(this).text();
           }).get();
 
           console.log(data);
 
           $('#examID').val(data[0]);
-          
+
 
         });
       });
@@ -842,11 +846,15 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
 
-
-
-
-
+    <!-- Add Question Form -->
     
+
+
+
+
+
+
+
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -859,7 +867,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
-    <?php include '../body/footer.php';?>
+    <?php include '../body/footer.php'; ?>
   </body>
 
   </html>

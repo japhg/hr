@@ -103,8 +103,8 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
           <!-- View Posted Jobs -->
           <div class="tab-content pt-2">
             <div class="tab-pane fade show active profile-overview" id="posted-jobs">
-              <table class="table table-secondary table-striped table-hover" id="example" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
-                <thead>
+              <table class="table" id="example" style="font-family: 'Roboto', sans-serif !important; text-align: center; width: 100%;">
+                <thead class="bg-dark text-white">
                   <tr>
                     <th>Job ID</th>
                     <th>Job Title</th>
@@ -159,8 +159,8 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                 <option value="Not-Shortlisted">Not Shortlisted</option>
 
               </select>
-              <table class="table table-secondary table-borderless" id="example1" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
-                <thead>
+              <table class="table table-sm table-borderless" id="example1" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
+                <thead class="bg-dark text-white">
                   <tr>
                     <th>Applicant ID</th>
                     <th>Applicant Name</th>
@@ -257,7 +257,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
             <!-- Screening -->
             <div class="tab-pane" id="screening">
               <table class="table table-borderless" id="example2" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
-                <thead>
+                <thead class="bg-dark text-white">
                   <tr>
                     <th>ID</th>
                     <th>Applicant Name</th>
@@ -283,8 +283,8 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
             <!-- Send Email -->
             <div class="tab-pane" id="rejected-applicant">
-              <table class="table table-secondary table-borderless" id="example3">
-                <thead>
+              <table class="table table-borderless" id="example3">
+                <thead class="bg-dark text-white">
                   <tr>
                     <th>#</th>
                     <th>Name</th>
