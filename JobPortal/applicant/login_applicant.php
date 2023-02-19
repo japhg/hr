@@ -96,6 +96,7 @@ if (isset($_POST['login'])) {
     </script>
   <?php unset($_SESSION['message']);
   } ?>
+
   <?php
   if (isset($_SESSION['warningmessage'])) { ?>
     <script>
@@ -106,6 +107,7 @@ if (isset($_POST['login'])) {
     </script>
   <?php unset($_SESSION['warningmessage']);
   } ?>
+  
   <?php
   if (isset($_SESSION['errorMessage'])) { ?>
     <script>
