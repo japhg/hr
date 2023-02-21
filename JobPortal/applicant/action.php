@@ -69,3 +69,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     header("location: manage_jobs.php");
   }
 ?>
+

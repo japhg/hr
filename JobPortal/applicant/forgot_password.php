@@ -282,7 +282,7 @@ function is_code_correct($code)
 									?>
 								</span>
 								<input class="textbox form-control" type="email" name="email" placeholder="Email Address" style="border-left: none; border-right: none; border-top: none; border-bottom: 1px solid #6559ca; box-shadow: none;"><br>
-								<br style="clear: both;">
+					 			<br style="clear: both;">
 								<input type="submit" class="btn" value="Next" style="background: #6559ca; color: #fff; float: right;">
 
 								<div><a href="javascript:void(0)" onclick="window.close()" class="btn btn-dark">Login</a></div>

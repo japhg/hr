@@ -77,15 +77,11 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
           <ul class="nav nav-tabs nav-tabs-bordered">
 
             <li class="nav-item">
-              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#posted-jobs">Add Exams</button>
+              <button class="nav-link active" data-bs-="tab" data-bs-target="#posted-jobs">Add Exams</button>
             </li>
 
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#shortlisting">Manage Examinees</button>
-            </li>
-
-            <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#exam-list">Exam List</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#examinees">Examinees</button>
             </li>
 
             <li class="nav-item">
@@ -143,20 +139,17 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
               <br><br><br>
               <hr>
 
-
-
-
               <!-- Table for Questions -->
               <table class="table table-sm table-hover" id="example01" style="font-family: 'Roboto', sans-serif !important; text-align: center;">
                 <thead class="bg-dark text-white">
                   <tr>
-                    <th>Job ID</th>
+                    <th>Exam ID</th>
                     <th>Job Title</th>
                     <th>Exam Title</th>
-                    <th>Exam Date and Time</th>
                     <th>Exam Duration</th>
                     <th>Mark per right answer</th>
                     <th>Mark per wrong answer</th>
+                    <th>Number of Items</th>
                     <th>Exam Status</th>
                     <th>Actions</th>
                     <th>Actions</th>
@@ -168,17 +161,16 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                 <tbody>
                   <?php
 
-                  $query = "SELECT job.title, exam.*, DATE_FORMAT(exam_datetime, '%M %d, %Y')as formatted_date FROM job_tbl job, exam_tbl exam WHERE job.job_id = exam.job_id";
+                  $query = "SELECT job.title, exam.* FROM job_tbl job, exam_tbl exam WHERE job.job_id = exam.job_id";
                   $result = mysqli_query($con, $query);
                   if (mysqli_num_rows($result)) {
                     while ($row = mysqli_fetch_assoc($result)) {
-
                   ?>
                       <tr>
                         <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['title']; ?></td>
                         <td><?php echo $row['exam_title']; ?></td>
-                        <td><?php echo $row['formatted_date']; ?></td>
+                        
                         <?php
                         if ($row['exam_duration'] === "5") {
                           echo "<td>5 Minutes</td>";
@@ -194,15 +186,22 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                         ?>
 
                         <td>+<?php echo $row['mark_per_right_answer']; ?> points</td>
-                        <td>-<?php echo $row['mark_per_right_answer']; ?> points</td>
+                        <td>-<?php echo $row['mark_per_wrong_answer']; ?> points</td>
+                        <td><?php echo $row['number_of_items']; ?> items</td>
                         <?php
-                        if ($row['exam_status'] === "Pending") {
-                          echo '<td><span class="badge bg-warning" style="color: black;">Pending</span></td>';
-                          echo '<td><button class="btn btn-primary btn-sm addQuestionBtn">Add Questions</button></td>';
-                        } elseif ($row['exam_status'] === "Completed") {
-                          echo '<td><span class="badge bg-dark">Completed</span></td>';
-                          echo '<td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">View Questions</button></td>';
-                        }
+                        if ($row['exam_status'] === "Pending") { ?>
+                          <td><span class="badge bg-warning" style="color: black;">Pending</span></td>
+                          <td><button class="btn btn-primary btn-sm addQuestionBtn">Add Questions</button></td>
+                        <?php } elseif ($row['exam_status'] === "Completed") { ?>
+                          <td><span class="badge bg-dark">Completed</span></td>
+                          <td>
+                              <input type="hidden" name="viewQuestion" class="viewQuestion" value="<?php echo $row['id']; ?>">
+                              <button class="btn btn-success btn-sm viewQuestionBtn">View Question</button>
+                          </td>
+                        <?php } elseif ($row['exam_status'] === "Incomplete") { ?>
+                          <td><span class="badge bg-danger" style="color: white;">Incomplete</span></td>
+                          <td><button class="btn btn-primary btn-sm addQuestionBtn">Add Questions</button></td>
+                        <?php }
                         ?>
 
                         <td><button class="btn btn-info text-white updateExamBtn">Update</button></td>
@@ -235,13 +234,6 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                             <div class="col-auto">
                               <label for="exam_title" class="form-label" style="color: #000;">Exam Title</label>
                               <input type="text" class="form-control" name="exam_title" id="exam_title" style="box-shadow: none;" required>
-                              <div class="invalid-feedback">
-                                This field is required.
-                              </div>
-                            </div>
-                            <div class="col-auto py-3">
-                              <label for="exam_date&time" class="form-label" style="color: #000;">Exam Date and Time</label>
-                              <input type="datetime-local" class="form-control" name="exam_date&time" id="exam_date&time" style="box-shadow: none;" required>
                               <div class="invalid-feedback">
                                 This field is required.
                               </div>
@@ -287,6 +279,10 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                               <div class="invalid-feedback">
                                 This field is required.
                               </div>
+                            </div>
+                            <div class="col-auto">
+                              <label for="number_of_items">Number of Items</label>
+                              <input type="number" name="number_of_items" class="form-control" id="number_of_items">
                             </div>
                       </div>
                       <div class="modal-footer">
@@ -387,7 +383,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
                 <!-- Add Questions Modal Form ################################################################################################################################################# -->
-                <div class="modal fade" id="addQuestionBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="addQuestionBtn" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -400,8 +396,11 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                         $result = mysqli_query($con, $query);
                         if (mysqli_num_rows($result)) {
                           $row = mysqli_fetch_assoc($result);
+
                         ?>
                           <form action="action.php" method="post" class="form-group needs-validation" novalidate>
+
+                            <hr><br>
                             <input type="hidden" name="examID" id="examID" value="<?php echo $row['id']; ?>">
                             <div class="col-auto">
                               <label for="questionTitle" class="form-label" style="color: #000;">Question Title</label>
@@ -452,9 +451,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                               </div>
                             </div>
                             <br>
-                            <div class="col-auto">
-                              <button type="button" class="btn btn-primary" id="add-question">Add +</button>
-                            </div>
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -466,6 +463,34 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                   </div>
                 </div>
 
+                <!-- View Questions #################################################################################################### -->
+                <!-- Start Modal -->
+                <div class="modal fade" id="viewQuestionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="viewQuestionModalLabel-<?php echo $row['id']; ?>">Exam Question</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        
+                        <p>Unique ID: <?php echo $row['id']; ?></p>
+                  
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End of modal -->
+
+
+
+
+
+
               </table>
 
 
@@ -475,7 +500,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
             <!-- View Applicants -->
-            <div class="tab-pane" id="shortlisting">
+            <div class="tab-pane" id="examinees">
               <!-- Button trigger modal -->
 
               <label for="filter-select">Filter by:</label>
@@ -496,7 +521,6 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                     <th>Date Applied</th>
                     <th>Resume Attached</th>
                     <th>Status</th>
-                    <th>Actions</th>
                     <th>Actions</th>
 
                   </tr>
@@ -557,11 +581,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
                           <td>
                             <input type="hidden" name="view" class="view" id="views" value="<?php echo $row['r_id']; ?>">
-                            <a href="javascript:void(0)" class="shortlist_btn_ajax btn btn-primary">Appoint</a>
-                          </td>
-                          <td>
-                            <input type="hidden" name="rview" class="rview" id="rviews" value="<?php echo $row['r_id']; ?>">
-                            <a href="javascript:void(0)" class="shortlist_reject_btn_ajax btn btn-dark">Reject</a>
+                            <a href="javascript:void(0)" class="shortlist_btn_ajax btn btn-primary">View Details</a>
                           </td>
 
                         <?php } ?>
@@ -846,11 +866,59 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
 
 
-    <!-- Add Question Form -->
+    <!-- View Questions -->
+    <!-- <script>
+     $(document).ready(function() {
+  $('.viewQuestionBtn').on('click', function() {
+    var id = $(this).closest("tr").find('.viewQuestion').val();
     
+   // Get the ID of the button that was clicked
+    console.log('ID:', id); // Add this line to check the value of id
+    $('#viewQuestionBtn').modal('show');
+    $('#exam_id').val(id); // Set the value of the input field to the ID of the button
+  });
+});
+
+$(document).ready(function() {
+        $('.viewQuestionBtn').on('click', function() {
+          $('#viewQuestionBtn').modal('show');
+
+          $tr = $(this).closest('tr');
+
+          var id = $(this).closest("tr").find('.viewQuestion').val();
+          var data = $tr.children("td").map(function() {
+            return $(this).text();
+          }).get();
+
+          console.log(data);
+
+          $('#exam_id').val(data[0]);
+        });
+      });
+    </script> -->
 
 
-
+<script>
+  $(document).ready(function() {
+  $('tbody').on('click', '.viewQuestionBtn', function() {
+    var examId = $(this).prev('.viewQuestion').val();
+    $('#viewQuestionModal').modal('show');
+    
+    // load the corresponding question(s) for the clicked row
+    $.ajax({
+      url: 'load_questions.php',
+      type: 'post',
+      data: { exam_id: examId },
+      success: function(response) {
+        $('#viewQuestionModal .modal-body').html(response);
+      },
+      error: function() {
+        alert('Error loading questions.');
+      }
+    });
+  });
+});
+</script>
 
 
 

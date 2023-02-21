@@ -1,6 +1,7 @@
 <?php
-include "../database/connection.php";
-include "../body/function.php";
+require "../database/connection.php";
+require "../../../../ALEGARIO/Hospital-template/database/connection.php";
+require "../body/function.php";
 session_start();
 
 if (isset($_SESSION['email'], $_SESSION['password'])) {
@@ -46,6 +47,9 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha512-qNOgON0B9KMz+UEI8JjlcEcBxtl28ULZIOwFZmBmCJfYBYidFzbC9PUDoN8gKjzpLNoQalNqbZwheNQww/u+Ew==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-lZFHibZ8Oz5VUUXm93eI/lFpn8LyoYf7S9s/6+4hLWI33D6U0FvM/seqp6k4g4+q3BvN3X1TPI7aVT2WGe3i0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha512-OOv0Yy9FChEoNhOcpntG8Qv42+bCZohE2ge/QwSZ+0FpkRbO9y5Ozg98xMkq3zr5MfaC/5JQ1w+dn/YkNtXCHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <link rel="stylesheet" href="../css/style/search_results.css">
@@ -55,7 +59,7 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 
 
-    <title>My Status</title>
+    <title>Examination</title>
 
   </head>
 
@@ -79,10 +83,72 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
       </div>
     </div>
 
-
+    <!-- SELECT applicant.*, job.*, resumes.*, exam.*, question.*, optionss.* FROM applicant_tbl applicant, job_tbl job, resume_tbl resumes, exam_tbl exam, question_tbl question, option_tbl optionss WHERE applicant.id = resumes.a_id AND job.job_id = resumes.j_id AND job.job_id = exam.job_id AND exam.id = question.exam_id AND question.id = optionss.question_id ORDER BY question.id, optionss.id; -->
+   
     <div class="main">
-   EXAM
+    <?php
+$query = "SELECT applicant.*, job.*, resumes.*, exam.*, DATE_FORMAT(date_uploaded, '%M %d, %Y') as formatted_date 
+          FROM applicant_tbl applicant, job_tbl job, resume_tbl resumes, exam_tbl exam
+          WHERE applicant.id = resumes.a_id 
+          AND job.job_id = resumes.j_id 
+          AND job.job_id = exam.job_id 
+          AND email_address = '".$_SESSION['email']."'";
+
+$result = mysqli_query($con, $query);
+
+if (mysqli_num_rows($result)) {
+  while ($row = mysqli_fetch_assoc($result)) {
+    $status = $row['resume_status'];
+    $rows = mysqli_num_rows($result);
+    if ($status === "Examination") {
+?>
+      <div class="card w-75 mb-3">
+        <div class="card-body">
+          <h5 class="card-title text-dark"><?php echo $row['exam_title'];?></h5>
+          <?php 
+          if($row['exam_duration'] === "120"){
+            echo '<p class="card-text">Time limit: 2 hours</p>';
+          } elseif($row['exam_duration'] === "60"){
+            echo '<p class="card-text">Time limit: 1 hour</p>';
+          } elseif($row['exam_duration'] === "30"){
+            echo '<p class="card-text">Time limit: 30 minutes</p>';
+          } elseif($row['exam_duration'] === "10"){
+            echo '<p class="card-text">Time limit: 10 minutes</p>';
+          } elseif($row['exam_duration'] === "5"){
+            echo '<p class="card-text">Time limit: 5 minutes</p>';
+          }
+          ?>
+          <p class="card-text">Number of questions: <?php echo $row['number_of_items'];?> items</p>
+          <input type="hidden" name="popupModal" class="popupModal" value="<?php echo $row['id']; ?>">
+          <button class="btn btn-success btn-sm takeExamBtn">Take Exam</button>
+          </div>
+      </div>
+      <?php
+    }
+  }
+}
+?>
+
+      <div class="modal fade" id="take-exam" tabindex="-1" aria-labelledby="take-exam-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="take-exam-label">Take Examination</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <?php ?>
+            <div class="modal-body">
+              <p>Exam details:</p>
+              <p>Unique ID: <?php echo $row['id']; ?></p>
+              
+            </div>
+            <?php ?>
+          </div>
+        </div>
+      </div>
+
     </div>
+
 
 
 
@@ -91,8 +157,46 @@ if (isset($_SESSION['email'], $_SESSION['password'])) {
 
 
 
+    <script>
+      var newWin;
 
+      function openPopup() {
+        newWin = window.open('take_examination.php', 'Take Examination', 'width=5000, height=1000');
 
+        document.onmousedown = focusPopup;
+        document.onkeyup = focusPopup;
+        document.onmousemove = focusPopup;
+
+      }
+
+      function focusPopup() {
+        if (!newWin.closed) {
+          newWin.focus();
+        }
+      }
+    </script>
+
+<script>
+  $(document).ready(function() {
+  $('.card-body').on('click', '.takeExamBtn', function() {
+    var examId = $(this).prev('.popupModal').val();
+    $('#take-exam').modal('show');
+    
+    // load the corresponding question(s) for the clicked row
+    $.ajax({
+      url: 'get_data.php',
+      type: 'post',
+      data: { exam_id: examId },
+      success: function(response) {
+        $('#take-exam .modal-body').html(response);
+      },
+      error: function() {
+        alert('Error loading questions.');
+      }
+    });
+  });
+});
+</script>
 
 
     <!-- Vendor JS Files -->
