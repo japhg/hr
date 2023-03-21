@@ -1,7 +1,0 @@
-{
-    "require": {
-        "yidas/pagination": "^1.0",
-        "phpmailer/phpmailer": "^6.7",
-        "convertapi/convertapi-php": "^1.6"
-    }
-}
